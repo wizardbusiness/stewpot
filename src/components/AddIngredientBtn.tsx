@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react';
+import './AddIngredientBtn.css';
+
+type AddIngredientBtnProps = {ingredientType: string, ingredientQuantity: string};
 
 export default function AddIngredientBtn() {
-  // header nav
 
   return (
     <div>
+      
     </div>
   )
 }

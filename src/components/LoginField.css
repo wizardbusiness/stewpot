@@ -1,0 +1,16 @@
+.input-field {
+  border-radius: 5px;
+}
+
+.login-field {
+  display: flex;
+  justify-content: space-between;
+}
+
+#username-field {
+  margin-left: auto;
+}
+
+#password-field {
+  margin-left: auto;
+}
