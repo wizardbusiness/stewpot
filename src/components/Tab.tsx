@@ -1,9 +1,15 @@
 import React, {useState, useEffect} from 'react';
-export default function Tab() {
+import { Link } from 'react-router-dom';
+import './Tab.css';
+
+type tabPropTypes = { tabName: string, href: string };
+
+export default function Tab({ tabName, href } : tabPropTypes ) {
   // tab in sidebar
   
   return (
-    <div>
+    <div className='tab'>
+      <Link to={`/${href}`}>{tabName}</Link>
     </div>
   )
 }

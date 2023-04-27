@@ -1,0 +1,15 @@
+.tab {
+  height: 2em;
+  width: auto;
+  border: 1px darkgrey solid;
+  text-align: center;
+  vertical-align: middle;
+  
+}
+
+.tab:hover {
+  background-color: rgb(233, 233, 233);
+}
+.tab:active {
+  background-color: darkgray;
+}
