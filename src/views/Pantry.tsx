@@ -3,8 +3,8 @@ import { Outlet } from 'react-router-dom';
 
 export default function Pantry() {
   // saved ingredients
-
-  return (
+  
+  return (  
     <div>
       Pantry
       <Outlet />
