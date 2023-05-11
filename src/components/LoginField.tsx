@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import './LoginField.css';
 
 type loginFieldPropTypes = { inputLabel: string, inputType: string}
 

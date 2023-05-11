@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import Tab from '../components/Tab.tsx';
-import './Sidebar.css';
 
 type tabStateType = string[];
 
