@@ -6,6 +6,11 @@ import Pantry from './views/Pantry.tsx';
 import FindRecipes from './views/FindRecipes.tsx';
 import RouterErrorPage from './components/RouterError.tsx';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 
 const router = createBrowserRouter([
   {
@@ -35,3 +40,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <RouterProvider router={router}/>
   </React.StrictMode>,
 )
+
+

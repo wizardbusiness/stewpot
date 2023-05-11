@@ -4,8 +4,7 @@ import './Sidebar.css';
 
 type tabStateType = string[];
 
-const iTabState: tabStateType = ['Pantry', 'Favorites', 'Find Recipes' ]
-
+const iTabState: tabStateType = ['Pantry', 'Favorites', 'Find Recipes' ];
 
 export default function Sidebar() {
   // navigate to different tabs
