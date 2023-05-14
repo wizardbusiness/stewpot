@@ -10,10 +10,10 @@ export default function Pantry() {
   
   return (  
     <Box sx={{padding: '2em'}}>
-      <Stack direction='row' spacing={1} >
-        <TextField label='...Search Ingredients'/>
-        <Button variant='contained' size='small' sx={{backgroundColor: '#90767a'}}>
-          <Typography >Add Ingredient +</Typography>
+      <Stack direction='row' sx={{width: '100%'}}>
+        <TextField sx={{width: '25%'}} label='...Add A New Ingredient'/>
+        <Button variant='contained' size='small' sx={{backgroundColor: '#f6af41'}}>
+          <Typography> + Ingredient</Typography>
         </Button>
       </Stack>
       <Box sx={{width: '100%', height: '2em'}}/>
