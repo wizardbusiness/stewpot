@@ -8,7 +8,12 @@ export default function Favorites() {
 
   return (
     <Box sx={{padding: '2em'}}>
-      <SearchBar btnText='Go'btnColor/>
+      <SearchBar 
+        justify='flex-start' 
+        btnText='Go' 
+        searchDefText='Search Favorite Recipes' 
+        btnColor
+      />
       <Box sx={{width: '100%', height: '2em'}}/>
       <Grid container gap={5}>
         {favorites.map((recipe, index) => (
