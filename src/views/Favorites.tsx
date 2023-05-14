@@ -1,16 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {Box, Stack, Grid, Card, CardContent, CardActions, CardMedia, Button, Typography, TextField} from '@mui/material';
+import {Box, Grid, Card, CardContent, CardMedia} from '@mui/material';
 import { favorites } from '../consts/viewMocks';
+import SearchBar from '../components/common/SearchBar';
 
 export default function Favorites() {
   // saved recipes
 
   return (
     <Box sx={{padding: '2em'}}>
-      <Stack direction='row' sx={{width:'100%'}}>
-        <TextField variant='outlined' sx={{width: '25%'}} label='...Search Favorite Recipes'/>
-        <Button variant='contained' size='large'>Go</Button>
-      </Stack>
+      <SearchBar btnText='Go'btnColor/>
       <Box sx={{width: '100%', height: '2em'}}/>
       <Grid container gap={5}>
         {favorites.map((recipe, index) => (
