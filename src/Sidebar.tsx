@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -33,15 +34,20 @@ export default function Sidebar() {
     setTabState(viewMocks);
   }, [])
 
+  const navigateToViews = useNavigate();
+
 
 
   return (
     <Drawer variant='permanent' sx={drawerStyles}>
-      <Toolbar><Typography variant='h4'>StewPot</Typography></Toolbar>
+      <Toolbar></Toolbar>
       <Divider></Divider>
       <List>
-        {tabState.map((item, index) => (
-            <ListItem key={`t${index}`} disablePadding>
+        {tabState.map((item) => (
+            <ListItem 
+              key={item.id} 
+              onClick={() => navigateToViews(item.route)}
+              disablePadding>
               <ListItemButton>
                 <ListItemIcon sx={{color: '#fff'}}>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.contents}/>
