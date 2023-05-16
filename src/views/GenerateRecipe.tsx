@@ -3,7 +3,7 @@ import {  Box, TextField, Button, Typography, } from '@mui/material';
 
 function GenerateRecipe() {
   return (
-    <Box sx={{padding: '2em', height: '100%', display: 'flex', flexDirection: 'column'}}>
+    <Box sx={{height: '90%', padding: '2em 2em 0em 2em', display: 'flex', flexDirection: 'column'}}>
       <Typography paddingBottom='0.5em' color='#616161' variant='h2'>Generate Recipe</Typography> 
       <Box sx={{width: '100%'}}>
         <TextField  
@@ -17,19 +17,18 @@ function GenerateRecipe() {
         <Button variant='contained' size='large'>Create Recipe</Button>
       </Box>
       <Box padding='2em'></Box>
-      <fieldset style={{
-        minHeight: '5vh',
-        // flexGrow: 1,
+      <Box style={{
+        padding: '1em',
+        height: '100%',
+        flexGrow: 1,
         color: 'darkgrey',
         backgroundColor: '#f4f4f4',
-        border: '1px solid lightgrey',
         borderRadius: '4px'
-
       }}
       >
-        <legend>Output</legend>
-        <Typography>...</Typography>
-      </fieldset>
+        {/* <legend>Output</legend> */}
+        <Typography fontSize='1.2em'>...</Typography>
+      </Box>
     </Box>
   )
 }
