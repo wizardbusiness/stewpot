@@ -1,21 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Root from '../src/views/Root.tsx';
+import App from './App.tsx';
 import Favorites from './views/Favorites.tsx';
 import Pantry from './views/Pantry.tsx';
 import FindRecipes from './views/FindRecipes.tsx';
 import RouterErrorPage from './components/RouterError.tsx';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import GenerateRecipe from './views/GenerateRecipe.tsx';
 
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root />,
+    element: <App />,
     errorElement: <RouterErrorPage />,
     children: [
       {
@@ -27,8 +24,12 @@ const router = createBrowserRouter([
         element: <Pantry />
       },
       {
-        path: 'find%recipes',
+        path: 'find-recipe',
         element: <FindRecipes />
+      },
+      {
+        path: 'generate-recipe',
+        element: <GenerateRecipe />
       }
   ]
   },
