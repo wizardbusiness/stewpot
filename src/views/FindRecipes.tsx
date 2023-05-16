@@ -14,7 +14,7 @@ import { ExpandMore } from '@mui/icons-material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import SearchBar from '../components/common/SearchBar';
 import RecipeCard from '../components/common/RecipeCard';
-import { pantryRows, pantryColumns, favorites } from '../consts/viewMocks'; // dummy data
+import { pantryRows, pantryColumns, favorites } from '../consts/dummyData'; // dummy data
 
 export default function FindRecipes({storedIngredients}) {
   const [ selectedColumns, setSelectedColumns ] = useState<GridColDef[] | []>([]);

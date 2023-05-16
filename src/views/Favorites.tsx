@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Box, Grid, Typography} from '@mui/material';
 import SearchBar from '../components/common/SearchBar';
 import RecipeCard from '../components/common/RecipeCard';
-import { favorites } from '../consts/viewMocks';
+import { favorites } from '../consts/dummyData';
 
 export default function Favorites() {
   // saved recipes
