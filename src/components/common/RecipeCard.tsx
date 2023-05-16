@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Grid, Card, CardContent, CardMedia} from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
-import { favorites } from '../../consts/viewMocks';
+import { favorites } from '../../consts/dummyData';
 
 const RecipeCard = ({name, id, starred}) => {
   return (
