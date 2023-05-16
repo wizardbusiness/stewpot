@@ -9,7 +9,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import {viewMocks, viewMocksInterface} from './consts/viewMocks.tsx';
+import {viewMocks, viewMocksInterface} from './consts/dummyData.tsx';
 
 const drawerWidth = 240;
 
