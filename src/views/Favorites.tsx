@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {Box, Grid, Card, CardContent, CardMedia} from '@mui/material';
-import { favorites } from '../consts/viewMocks';
+import {Box, Grid, Typography} from '@mui/material';
 import SearchBar from '../components/common/SearchBar';
+import RecipeCard from '../components/common/RecipeCard';
+import { favorites } from '../consts/viewMocks';
 
 export default function Favorites() {
   // saved recipes
 
   return (
     <Box sx={{padding: '2em'}}>
+      <Typography paddingBottom='0.5em' color='#616161' variant='h2'>Favorites</Typography>
       <SearchBar 
         justify='flex-start' 
         btnText='Go' 
@@ -16,30 +18,8 @@ export default function Favorites() {
       />
       <Box sx={{width: '100%', height: '2em'}}/>
       <Grid container gap={5}>
-        {favorites.map((recipe, index) => (
-          <Grid key={recipe.name} item>
-            <Card 
-              variant='outlined'
-              sx={{
-                height: 250, 
-                width: 250, 
-                display: 'flex', 
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: '15px',
-              }}
-            
-            >
-              <CardMedia 
-                  sx={{minHeight: '100%', minWidth: 150, filter: 'blur(2px)'}}
-                  image={`../../static/images/mockImages/stock-img-${index + 1}.jpg`}
-                  title={recipe.name}
-              />
-              <CardContent>
-                {recipe.name}
-              </CardContent>
-            </Card>
-          </Grid>
+        {favorites.map(recipe => (
+          <RecipeCard name={recipe.name} id={recipe.id} starred/>
         ))}
       </Grid>
     </Box>
