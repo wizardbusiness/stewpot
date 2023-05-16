@@ -18,14 +18,17 @@ function GenerateRecipe() {
       </Box>
       <Box padding='2em'></Box>
       <fieldset style={{
-        // height: '20vh',
-        flexGrow: 1,
+        minHeight: '5vh',
+        // flexGrow: 1,
+        color: 'darkgrey',
+        backgroundColor: '#f4f4f4',
         border: '1px solid lightgrey',
         borderRadius: '4px'
 
       }}
       >
         <legend>Output</legend>
+        <Typography>...</Typography>
       </fieldset>
     </Box>
   )
