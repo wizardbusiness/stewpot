@@ -61,7 +61,10 @@ export const pantryRows: GridRowsProp = [
   {id: 2, ingredient: 'Avocado', qt: 1, unit: '', location: 'Counter'},
   {id: 3, ingredient: 'Eggs', qt: 1, unit: 'Dozen', location: 'Fridge'},
   {id: 4, ingredient: 'Mixed Greens', qt: 1, unit:'Container', location: 'Fridge'},
-  {id: 5, ingredient: 'Chicken', qt: 1, unit: 'Thighs', location: 'Fridge'},
+  {id: 5, ingredient: 'Salt', qt: 1, unit: 'Thighs', location: 'Fridge'},
+  {id: 6, ingredient: 'Lemon', qt: 1, unit: '', location: 'Fridge'},
+  {id: 7, ingredient: 'Rapini', qt: 1, unit: 'Bunch', location: 'Fridge'},
+  {id: 8, ingredient: 'Chuck Roast', qt: 1, unit: 'lb', location: 'Fridge'},
 ];
 
 // Favorites
@@ -95,7 +98,7 @@ export const favorites: favoritesInterface[] = [
 ];
 
 // find recipes
-type pantryIngredient = string;
+export type pantryIngredient = string;
 export const pantryIngredients: pantryIngredient[] = [
   'Bread',
   'Avocado',
