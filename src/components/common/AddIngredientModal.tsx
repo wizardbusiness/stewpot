@@ -17,6 +17,7 @@ const modalStyle = {
   boxShadow: 20,
   padding: '2em'
 }
+
 const AddIngredientModal = () => {
   const [ open, setOpen] = useState(false);
   
