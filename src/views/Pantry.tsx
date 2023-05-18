@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Box, TextField, Stack, Button, Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { pantryRows, pantryColumns } from '../consts/dummyData';
-import SearchBar from '../components/common/SearchBar';
+import IngredientSearchbar from '../components/common/IngredientSearchbar';
 import { Search } from '@mui/icons-material';
 
 
@@ -16,7 +16,7 @@ export default function Pantry() {
         
       </Box>
       <Typography paddingBottom='0.5em' color='#616161' variant='h2'>Pantry</Typography>
-      <SearchBar 
+      <IngredientSearchbar 
         justify='flex-start' 
         btnText='+ Ingredient' 
         searchDefText='Add Ingredient' 
