@@ -51,9 +51,9 @@ export const viewMocks: viewMocksInterface[] = [
 export const pantryColumns: GridColDef[] = [
   {field: 'ingredient', headerName: 'Ingredient', width: 200, editable: true},
   {field: 'qt', headerName: 'Qt.', width: 50, editable: true},
-  {field: 'unit', headerName: 'Unit', width: 200, editable: true},
-  {field: 'location', headerName: 'Location', width: 200, editable: true},
-  {field: '', headerName: '', width: 85, renderCell: () => <Button sx={{color: 'grey' , width: 30, height: 40, padding: 'none'}}><DeleteOutlineIcon/></Button>},
+  {field: 'unit', headerName: 'Unit', width: 150, editable: true},
+  {field: 'location', headerName: 'Location', width: 150, editable: true},
+  {field: '', headerName: '', width: 100, renderCell: () => <Button sx={{color: 'grey' , width: 30, height: 40, padding: 'none'}}><DeleteOutlineIcon/></Button>},
 ];
 
 export const pantryRows: GridRowsProp = [
@@ -65,6 +65,7 @@ export const pantryRows: GridRowsProp = [
   {id: 6, ingredient: 'Lemon', qt: 1, unit: '', location: 'Fridge'},
   {id: 7, ingredient: 'Rapini', qt: 1, unit: 'Bunch', location: 'Fridge'},
   {id: 8, ingredient: 'Chuck Roast', qt: 1, unit: 'lb', location: 'Fridge'},
+  {id: 9, ingredient: 'Chicken', qt: 1, unit: 'lb', location: 'Fridge'},
 ];
 
 // Favorites
