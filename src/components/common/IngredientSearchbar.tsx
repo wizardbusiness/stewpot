@@ -8,36 +8,15 @@ import {
   ListItemIcon,
   Checkbox,
   Typography,
-  Chip,
-
+  Chip
 } from '@mui/material';
 import Autocomplete, {createFilterOptions} from '@mui/material/Autocomplete';
-import PantryListItem from './pantryListItem';
-import { pantryIngredients, pantryIngredient } from '../../consts/dummyData';
 import Pantry from '../../views/Pantry';
 
 const filter = createFilterOptions<pantryIngredient>();
 
-const SearchBar = ({justify, btnText, searchDefText, btnColor}) => {
-  const [ ingredients, setIngredients ] = useState<pantryIngredient[] | []>([]);
-  const [checked, setChecked] = useState<string[] | []>([])
-
-  useEffect(() => {
-    setIngredients(pantryIngredients);
-  }, [])
-
-  const handleToggle = (value: string) => {
-    const currentIndex = checked.indexOf(value);
-    const updatedChecked = [...checked];
-    if (currentIndex === -1) {
-      updatedChecked.push(value);
-      
-    } else {
-      updatedChecked.splice(currentIndex, 1);
-    }
-    setChecked(updatedChecked);
-  }
-
+const SearchBar = ({ingredients, checked, setChecked, handleToggle, toggleAddRemoveRow, justify, }) => {
+  
   return (
     <Stack direction='row' justifyContent={justify} sx={{ width: '100%' }}>
     <Autocomplete
@@ -48,18 +27,26 @@ const SearchBar = ({justify, btnText, searchDefText, btnColor}) => {
       disableCloseOnSelect
       multiple
       value={checked}
-      onChange={(e, newVal) => setChecked(newVal)}
+      onChange={(e, newVal) => {
+        setChecked(newVal);
+      }
+    }
       renderTags={(checked) => {
         return checked.map(ingredient => (
           <Chip key={ingredient} label={ingredient} onDelete={() => {
             setChecked([...checked].filter((el => el !== ingredient)));
             handleToggle(ingredient);
+            toggleAddRemoveRow(ingredient);
           }}/>
         ));
       }}
       renderOption={(props, option) => (
         <Box component='li' {...props}>
-          <ListItemIcon onClick={() => handleToggle(option)}>
+          <ListItemIcon onClick={() => {
+              handleToggle(option);
+              toggleAddRemoveRow(option);
+            }}
+          >
             <Checkbox
               edge='start'
               checked={checked.indexOf(option) !== -1}
@@ -78,7 +65,7 @@ const SearchBar = ({justify, btnText, searchDefText, btnColor}) => {
         />
       )}
     />
-  </Stack>
+  </Stack> 
   )
 };
 
