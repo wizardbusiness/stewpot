@@ -33,7 +33,7 @@ export default function FindRecipes({storedIngredients}) {
   return (
     <Box sx={{padding: '2em'}}>
       <Typography paddingBottom='0.5em' color='#616161' variant='h2'>Find Recipes</Typography>
-      <AddIngredientModal />
+      <AddIngredientModal infoText='Get Started &gt;' pantry={false} btnText='+ Add Ingredients From Pantry' searchTxt='Search Pantry' includeControls/>
       
       <Box sx={{padding: '2em'}}>
       </Box>
