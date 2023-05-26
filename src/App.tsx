@@ -1,6 +1,6 @@
+import { Box, GlobalStyles, CssBaseline } from '@mui/material';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { CssBaseline, Box, GlobalStyles  } from '@mui/material';
 import Header from './components/Header';
 import Sidebar from './Sidebar';
 import LoginField from './components/LoginField';

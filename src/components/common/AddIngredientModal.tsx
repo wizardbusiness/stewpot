@@ -1,18 +1,15 @@
-import React, {useState, useEffect, useRef} from 'react';
+import {useState, useEffect} from 'react';
+
 import { Box, 
   Button, 
   Stack, 
   Modal, 
-  Accordion, 
-  AccordionSummary, 
-  AccordionDetails, 
   FormGroup, 
   FormControlLabel, 
   Switch, 
   Typography
 } from '@mui/material';
-import { ExpandMore } from '@mui/icons-material';
-import { DataGrid, useGridApiRef, GridRowsProp } from '@mui/x-data-grid';
+import { GridRowsProp } from '@mui/x-data-grid';
 import IngredientSearchbar from './IngredientSearchbar';
 import IngredientsAccordion from './IngredientsAccordion';
 import { pantryIngredients, pantryIngredient, pantryRows, pantryColumns } from '../../consts/dummyData';
@@ -30,7 +27,7 @@ const modalStyle = {
   padding: '3em',
 }
 
-const AddIngredientModal = () => {
+const AddIngredientModal = ({infoText, pantry, btnText, searchTxt, includeControls}) => {
   const [ open, setOpen] = useState(false);
   const [ ingredients, setIngredients ] = useState<pantryIngredient[]>([]);
   const [ ingRows, setIngRows ] = useState<GridRowsProp>([])
@@ -73,10 +70,9 @@ const AddIngredientModal = () => {
   return (
     <Box>
       <Stack direction='row' alignItems='center' gap='1em'>
-        <Typography color='#616161' fontSize='1.7em'>Get Started &gt;</Typography>
-        <Button variant='outlined' size='large' onClick={handleOpen} sx={{padding: '1em'}}>+ Add Ingredients From Pantry</Button>
+        {/* <Typography color='#616161' fontSize='1.7em'>{infoText}</Typography> */}
+        <Button variant='outlined' size='large' onClick={handleOpen} sx={{padding: '1em'}}>{btnText}</Button>
       </Stack>
-      
       <Modal
         open={open}
         onClose={handleClose}
@@ -91,12 +87,15 @@ const AddIngredientModal = () => {
             handleToggle={handleToggle}
             toggleAddRemoveRow={toggleAddRemoveRow}
             justify='center'
+            searchTxt={searchTxt}
             />
-          <FormGroup sx={{flexDirection: 'row', alignItems: 'center', padding:'2em'}}>
-            <FormControlLabel control={<Switch defaultChecked />} label='Include common ingredients'/> 
-            <FormControlLabel control={<Switch />} label='Include all pantry ingredients'/> 
-          </FormGroup>
-          <IngredientsAccordion checked={checked} columns={pantryColumns} selectedIngRows={selectedIngRows}/>
+          {includeControls && 
+            <FormGroup sx={{flexDirection: 'row', alignItems: 'center', padding:'2em'}}>
+              <FormControlLabel control={<Switch defaultChecked />} label='Include common ingredients'/> 
+              <FormControlLabel control={<Switch />} label='Include all pantry ingredients'/> 
+            </FormGroup> || 
+            <Box padding='1em' ></Box>}
+          <IngredientsAccordion checked={checked} columns={pantryColumns} selectedIngRows={selectedIngRows} toggleAddRemoveRow={toggleAddRemoveRow} />
           <Box sx={{width: '100%', height: '100', alignItems: 'flex-end', justifyContent: 'flex-end', padding: '1em'}}>
             <Button size='large' variant='contained'>Add Ingredients</Button>          
           </Box>
