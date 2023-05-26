@@ -110,14 +110,6 @@ export default function Pantry() {
     return { ...params.props, error: errorMessage}
   }, [allPantryRows])
 
-  // const pantryColumns: GridColDef[] = [
-  //   {field: 'ingredient', headerName: 'Ingredient', width: 200, editable: true, preProcessEditCellProps, renderEditCell: renderEditIngredient},
-  //   {field: 'qt', headerName: 'Qt.', width: 50, editable: true},
-  //   {field: 'unit', headerName: 'Unit', width: 150, editable: true},
-  //   {field: 'location', headerName: 'Location', width: 150, editable: true},
-  //   {field: 'removeRow', headerName: 'Remove Ingredient', width: 150, renderCell: (params) => <Button onClick={() => removeRow(params.row.id)}>Delete</Button>}
-  // ];
-
   useEffect(() => {
     setAllPantryRows(pantryRows);
     setSearchedPantryRows(pantryRows);
