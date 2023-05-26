@@ -10,12 +10,9 @@ import {
   Typography,
   Chip
 } from '@mui/material';
-import Autocomplete, {createFilterOptions} from '@mui/material/Autocomplete';
-import Pantry from '../../views/Pantry';
+import { Autocomplete } from '@mui/material/';
 
-const filter = createFilterOptions<pantryIngredient>();
-
-const SearchBar = ({ingredients, checked, setChecked, handleToggle, toggleAddRemoveRow, justify, }) => {
+const SearchBar = ({ingredients, checked, setChecked, handleToggle, toggleAddRemoveRow, justify, searchTxt}) => {
   
   return (
     <Stack direction='row' justifyContent={justify} sx={{ width: '100%' }}>
@@ -61,7 +58,7 @@ const SearchBar = ({ingredients, checked, setChecked, handleToggle, toggleAddRem
       renderInput={(params) => (
         <TextField
           {...params}
-          label='Search Pantry'
+          label={searchTxt}
         />
       )}
     />
