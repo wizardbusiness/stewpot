@@ -1,4 +1,3 @@
-import React from 'react'
 import { 
   Accordion, 
   AccordionSummary, 
@@ -8,7 +7,7 @@ import {
 import { ExpandMore } from '@mui/icons-material';
 import { DataGrid, useGridApiRef, GridRowsProp } from '@mui/x-data-grid';
 
-const IngredientsAccordion = ({checked, selectedIngRows, columns}) => {
+const IngredientsAccordion = ({checked, selectedIngRows, columns, toggleAddRemoveRow}) => {
   return (
     <Accordion>
             <AccordionSummary
