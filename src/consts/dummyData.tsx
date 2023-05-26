@@ -53,7 +53,6 @@ export const pantryColumns: GridColDef[] = [
   {field: 'qt', headerName: 'Qt.', width: 50, editable: true},
   {field: 'unit', headerName: 'Unit', width: 150, editable: true},
   {field: 'location', headerName: 'Location', width: 150, editable: true},
-  {field: '', headerName: '', width: 100, renderCell: () => <Button sx={{color: 'grey' , width: 30, height: 40, padding: 'none'}}><DeleteOutlineIcon/></Button>},
 ];
 
 export const pantryRows: GridRowsProp = [
