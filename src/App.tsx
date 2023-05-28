@@ -11,25 +11,23 @@ function App() {
     <>
         <CssBaseline />
         <GlobalStyles styles={{ html: {height: '100%'}, body: {height: '100%'}, '#root': {height: '100%'} }} />
-        {loggedIn ? 
+        {loggedIn ? (
           <Box sx={{
-            display: 'flex',
-            minHeight: '100%'
+            display: 'flex'
             
           }}>
             <Sidebar />
-            <Box sx={{
-              flexGrow: 1,
-            }}>
+            <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', flexGrow: 1}}>
               <Header />
               <Outlet />
             </Box>
           </Box> 
-          : 
+          ) : (
           <>
             <LoginField inputLabel=' Username' inputType='username'></LoginField>
             <LoginField inputLabel=' Password' inputType='password'></LoginField>
           </>
+          )
         }
     </>
   )
