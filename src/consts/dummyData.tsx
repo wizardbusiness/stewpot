@@ -18,33 +18,37 @@ export interface viewMocksInterface {
 export const viewMocks: viewMocksInterface[] = [
   {
     id: 0,
-    icon: <Icon path={mdiNutrition} size={1} />,
+    icon: <Icon path={mdiNutrition} size={2} />,
     label: 'Pantry',
     contents: 'Pantry',
     route: 'pantry',
   },
   {
     id: 1,
-    icon: <Icon path={mdiNoodles} size={1} />,
+    icon: <Icon path={mdiNoodles} size={2} />,
     label: 'Favorites',
     contents: 'Favorited recipes',
     route: 'favorites',
   },
   {
     id: 2,
-    icon: <Icon path={mdiBowlMix} size={1} />,
+    icon: <Icon path={mdiBowlMix} size={2} />,
     label: 'Find Recipes',
     contents: 'Find recipes',
     route: 'find-recipe' ,
   },
   {
     id: 3,
-    icon: <Icon path={mdiTestTube} size={1} />,
+    icon: <Icon path={mdiTestTube} size={2} />,
     label: 'Generate Recipes',
     contents: 'Generate recipes',
     route: 'generate-recipe',
   },
 ];
+
+//sidebar width
+export const drawerWidth = 290;
+
 
 // Pantry
 
