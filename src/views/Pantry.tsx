@@ -137,12 +137,13 @@ export default function Pantry() {
   }, [allPantryRows, preProcessEditCellProps, removeRow])
 
   return (  
-    <Box sx={{padding: '2em'}}>
-      <Typography color='#616161' variant='h2'>Pantry</Typography>
-      <Box display='flex' gap='0.5em' alignItems='center' padding='2em 0 2em 0'>
+    <Box sx={{padding: '2em', margin: '1em'}}>
+      <Typography flexShrink={1} color='#616161' variant='h2'>Pantry</Typography>
+      <Box display='flex' alignItems='center' padding='2em 0 2em 0'>
           {/* <Typography fontSize='1.2rem' sx={{color: 'slategray'}}>Add Ingredient</Typography> */}
-      <TextField variant='outlined' size='medium' placeholder='Search Ingredients' onChange={handleSearchIngByName} sx={{width: '23%'}}/>
-        </Box>
+        <TextField variant='outlined' size='medium' placeholder='Search Ingredients' onChange={handleSearchIngByName} sx={{width: '29%'}}/>
+        <Button  sx={{padding: '1em'}}size='large' variant='contained'>Go</Button>
+      </Box>
         <Button variant='contained' onClick={addNewRow}>+ Add New Ingredient</Button>
         <StyledDataGrid 
           getRowClassName={(params) => params.row.id >  oldRowsLength ? `super-row-theme--new-rows` : `super-row-theme${params.row.id}` } 
