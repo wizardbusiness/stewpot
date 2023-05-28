@@ -8,10 +8,11 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
+import Icon from '@mdi/react';
+import { Box, Stack } from '@mui/material';
+import { mdiPotSteam } from '@mdi/js';
 import Typography from '@mui/material/Typography';
-import {viewMocks, viewMocksInterface} from './consts/dummyData.tsx';
-
-const drawerWidth = 240;
+import {viewMocks, viewMocksInterface, drawerWidth} from './consts/dummyData.tsx';
 
 const drawerStyles = {
   width: drawerWidth,
@@ -37,22 +38,37 @@ export default function Sidebar() {
   const navigateToViews = useNavigate();
 
 
-
+//'#f5834c'
   return (
     <Drawer variant='permanent' sx={drawerStyles}>
-      <Toolbar></Toolbar>
+      <Toolbar disableGutters sx={{
+        display: 'flex',
+        alignItems: 'center',
+        height: '10%', 
+        // backgroundColor: '#FAAA6380',
+        // boxShadow: '-2px 2px 5px #d54949',
+        // border: '2px solid #FAAA6380'
+        
+      }}>
+        </Toolbar>
       <Divider></Divider>
-      <List>
+      <List sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '2em 0 0 0'}}>
         {tabState.map((item) => (
-            <ListItem 
-              key={item.id} 
-              onClick={() => navigateToViews(item.route)}
-              disablePadding>
-              <ListItemButton>
-                <ListItemIcon sx={{color: '#fff'}}>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.contents}/>
-              </ListItemButton>
-            </ListItem>
+          <>
+          <ListItem 
+            key={item.id} 
+            onClick={() => navigateToViews(item.route)}
+            disablePadding
+          >
+            <ListItemButton sx={{padding: '1em'}}>
+              <ListItemIcon sx={{ color: '#fff'}}>{item.icon}</ListItemIcon>
+              <ListItemText primary={<Typography fontSize='1.3em'>{item.contents}</Typography>}/>
+            </ListItemButton>
+            <Divider />
+          </ListItem>
+          
+          </>
+            
           ))
         }
       </List>
