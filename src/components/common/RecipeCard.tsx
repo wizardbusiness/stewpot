@@ -16,10 +16,13 @@ const cardStyle = {
     display: 'flex',
     justifyContent: 'space-between',
     color: 'white',
-    textShadow: '1px 1px 10px black',
     opacity: 0.9,
     height: '100%', 
     padding: '0',
+    transition: '0.2s',
+    '&:hover': {
+      opacity: 0.7
+    }
     
   },
   cardMedia: {
@@ -38,14 +41,32 @@ const cardStyle = {
     padding: '1em 1em 0 1em',
     maxWidth: '90%',
     minHeight: '35%',
-    textDecorationLine: 'underline',
-    textDecorationThickness: '1px'
+    // textDecorationLine: 'underline',
+    // textDecorationThickness: '1px',
+    textShadow: '1px 1px 10px black',
+    opacity: 1,
+    transition: '0.3s',
+    '&:hover': {
+      opacity: 1
+    }
 
   },
   recipeDescription: {
     padding: '1em',
-    flexGrow: 1,
-    opacity: 0.5
+    opacity: 1,
+    textShadow: '1px 1px 10px black',
+    // background: 'linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0))',
+    // '-webkit-background-clip': 'text',
+    // '-webkit-text-fill-color': 'transparent',
+    transition: '0.3s',
+    '&:hover': {
+      textShadow: '1px 1px 10px black',
+      // background: 'linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1))',
+      // '-webkit-background-clip': 'text',
+      // '-webkit-text-fill-color': 'transparent',
+      opacity: 1,
+      
+    }
   },
   star: {
     color: '#fbc34b',
@@ -67,10 +88,10 @@ const RecipeCard = ({name, id, starred}) => {
                   <Typography variant='h6' >{name}</Typography>
 
                 </Box>
-                <Divider color='white'></Divider>
-                <Box sx={cardStyle.recipeDescription}>
-                  <Typography>Lorem Ipsum Blah blah blah asdf a aadfff asdfddfdfdfdf aasssssssdfdfdfdfd</Typography>
-                </Box>
+                <Divider color='lightgrey' ></Divider>
+                {/* <Box sx={cardStyle.recipeDescription}>
+                  <Typography>Delicious salmon filet with pine nuts and fresh spring greens</Typography>
+                </Box> */}
               </Stack>
               {starred ? <StarIcon fontSize='large' sx={cardStyle.star} /> : <StarBorder fontSize='large' sx={cardStyle.star} />}
               <CardMedia 
