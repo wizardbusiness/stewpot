@@ -4,11 +4,12 @@ import { Box, TextField, Button, Typography, styled} from '@mui/material';
 import Tooltip, {tooltipClasses, TooltipProps} from '@mui/material/Tooltip';
 import { DataGrid, GridColDef, GridRowsProp, GridPreProcessEditCellProps, GridRenderEditCellParams, GridEditInputCell} from '@mui/x-data-grid';
 import { yellow } from '@mui/material/colors';
+import SearchBar from '../components/common/SearchBar';
 import { pantryRows, pantryColumns } from '../consts/dummyData';
 
 interface newRow {
   id: number,
-  ingredient: string,
+  name: string,
   qt: string,
   unit: string,
   location: string
@@ -60,30 +61,12 @@ export default function Pantry() {
   const [ searchedPantryRows, setSearchedPantryRows ] = useState<GridRowsProp>([]);
   const [ oldRowsLength, setOldRowsLength ] =useState<number>(0);
 
-  const handleSearchIngByName = (e) => {
-    e.preventDefault();
-    const searchStr = e.target.value.toLowerCase().trim();
-
-    const searchRes = allPantryRows.filter(row => {
-      const ingredient = row.ingredient.toLowerCase();
-      const ingredientWords = row.ingredient.toLowerCase().split(' ');
-      const allValidSearchCombs = new Set([...ingredientWords, ingredient]);
-      
-      const searchedWords = [...allValidSearchCombs].filter((word: string) => word.startsWith(searchStr));
-      console.log(searchedWords)
-      return ingredient.includes(searchedWords[0]);
-    });
-
-    setSearchedPantryRows(searchRes);
-    return;
-  }
-
   const addNewRow = () => {
     const updatedRows = [...allPantryRows];
 
     const newRow: newRow = {
       id: allPantryRows.length + 1,
-      ingredient: 'New Ingredient',
+      name: 'New Ingredient',
       qt: '0',
       unit: '0',
       location: 'Set Location'
@@ -139,14 +122,10 @@ export default function Pantry() {
   return (  
     <Box sx={{padding: '2em', margin: '1em'}}>
       <Typography flexShrink={1} color='#616161' variant='h2'>Pantry</Typography>
-      <Box display='flex' alignItems='center' padding='2em 0 2em 0'>
-          {/* <Typography fontSize='1.2rem' sx={{color: 'slategray'}}>Add Ingredient</Typography> */}
-        <TextField variant='outlined' size='medium' placeholder='Search Ingredients' onChange={handleSearchIngByName} sx={{width: '29%'}}/>
-        <Button  sx={{padding: '1em'}}size='large' variant='contained'>Go</Button>
-      </Box>
+        <SearchBar placeholderText='Search Ingredients' data={allPantryRows} dataProperty='name' setResults={setSearchedPantryRows} />
         <Button variant='contained' onClick={addNewRow}>+ Add New Ingredient</Button>
         <StyledDataGrid 
-          getRowClassName={(params) => params.row.id >  oldRowsLength ? `super-row-theme--new-rows` : `super-row-theme${params.row.id}` } 
+          getRowClassName={(params) => params.row.id > oldRowsLength ? `super-row-theme--new-rows` : `super-row-theme${params.row.id}` } 
           rows={searchedPantryRows} 
           columns={allPantryColumns} 
         />
