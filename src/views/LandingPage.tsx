@@ -1,9 +1,12 @@
-import React from 'react'
+import { Box } from '@mui/material';
+import SvgStewpotLogoAnimated from '../components/svgComponents/StewpotLogo/StewPotLogoAnimated';
 
 const LandingPage = () => {
   return (
-    <div>LandingPage</div>
-  )
+    <Box>
+      <SvgStewpotLogoAnimated className='bubbles'/>
+    </Box>
+  );
 }
 
 export default LandingPage;
