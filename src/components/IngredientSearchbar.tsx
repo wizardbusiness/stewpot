@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { Autocomplete } from '@mui/material/';
 
-const SearchBar = ({ingredients, checked, setChecked, handleToggle, toggleAddRemoveRow, justify, searchTxt}) => {
+const SearchBar = ({ingredients, checked, setChecked, handleToggleChecked, toggleAddRemoveRow, justify, searchTxt}) => {
   
   return (
     <Stack direction='row' justifyContent={justify} sx={{ width: '100%' }}>
@@ -32,7 +32,7 @@ const SearchBar = ({ingredients, checked, setChecked, handleToggle, toggleAddRem
         return checked.map(ingredient => (
           <Chip key={ingredient} label={ingredient} onDelete={() => {
             setChecked([...checked].filter((el => el !== ingredient)));
-            handleToggle(ingredient);
+            handleToggleChecked(ingredient);
             toggleAddRemoveRow(ingredient);
           }}/>
         ));
@@ -40,7 +40,7 @@ const SearchBar = ({ingredients, checked, setChecked, handleToggle, toggleAddRem
       renderOption={(props, option) => (
         <Box component='li' {...props}>
           <ListItemIcon onClick={() => {
-              handleToggle(option);
+              handleToggleChecked(option);
               toggleAddRemoveRow(option);
             }}
           >
