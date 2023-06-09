@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.4.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#898989;}
+</style>
+<g>
+	<ellipse transform="matrix(0.7071 -0.7071 0.7071 0.7071 -20.7107 50.0001)" class="st0" cx="50" cy="50" rx="39" ry="39"/>
+	<path class="st1" d="M50,13.5c20.2,0,36.5,16.4,36.5,36.5S70.2,86.5,50,86.5S13.5,70.2,13.5,50S29.8,13.5,50,13.5 M50,8.5
+		C27.1,8.5,8.5,27.1,8.5,50S27.1,91.5,50,91.5S91.5,72.9,91.5,50S72.9,8.5,50,8.5L50,8.5z"/>
+</g>
+<g>
+	<polygon class="st0" points="47.8,77 47.8,52.5 23,52.5 23,48.3 47.8,48.3 47.8,23 52,23 52,48.3 77,48.3 77,52.5 52,52.5 52,77 	
+		"/>
+	<polygon class="st1" points="54.5,20.5 45.3,20.5 45.3,45.8 20.5,45.8 20.5,55 45.3,55 45.3,79.5 54.5,79.5 54.5,55 79.5,55 
+		79.5,45.8 54.5,45.8 54.5,20.5 	"/>
+</g>
+</svg>
