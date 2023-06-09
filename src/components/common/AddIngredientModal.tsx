@@ -10,9 +10,10 @@ import { Box,
   Typography
 } from '@mui/material';
 import { GridRowsProp } from '@mui/x-data-grid';
-import IngredientSearchbar from './IngredientSearchbar';
+import IngredientSearchbar from '../IngredientSearchbar';
 import IngredientsAccordion from './IngredientsAccordion';
-import { pantryIngredients, pantryIngredient, pantryRows, pantryColumns } from '../../consts/dummyData';
+import { pantryIngredients, pantryIngredient, pantryRows, commonIngredientRows, pantryColumns } from '../../consts/dummyData';
+import { common } from '@mui/material/colors';
 
 const modalStyle = {
   position: 'absolute',
@@ -31,20 +32,30 @@ const AddIngredientModal = ({infoText, pantry, btnText, searchTxt, includeContro
   const [ open, setOpen] = useState(false);
   const [ ingredients, setIngredients ] = useState<pantryIngredient[]>([]);
   const [ ingRows, setIngRows ] = useState<GridRowsProp>([])
-  const [ selectedIngRows, setSelectedIngRows ] = useState<GridRowsProp>([])
+  const [ selectedIngRows, setSelectedIngRows ] = useState<GridRowsProp>([]);
+  const [ commonIngredientsSelected, setCommonIngredientsSelected ] = useState<boolean>(true);
+  const [ allIngredientsSelected, setAllIngredientsSelected ] = useState<boolean>(false);
+
   const [ checked, setChecked ] = useState<string[]>([])
 
   useEffect(() => {
-    setIngredients(pantryIngredients);
+    const ingredientNames = pantryRows.map(row => row.name); 
+    const commonIngredientNames = commonIngredientRows.map(row => row.name)
+    setIngredients(ingredientNames);
     setIngRows(pantryRows);
+    setChecked(commonIngredientNames);
+    setSelectedIngRows(commonIngredientRows);
   }, []);
 
+  useEffect(() => {
+    // console.log(selectedIngRows);
+  }, [selectedIngRows]);
 
-  const handleToggle = (value: string) => {
-    const currentIndex: number = checked.indexOf(value);
+  const handleToggleChecked = (ing: string) => {
+    const currentIndex: number = checked.indexOf(ing);
     const updatedChecked = [...checked];
     if (currentIndex === -1) {
-      updatedChecked.push(value);
+      updatedChecked.push(ing);
     } else {
       updatedChecked.splice(currentIndex, 1);
     }
@@ -53,15 +64,45 @@ const AddIngredientModal = ({infoText, pantry, btnText, searchTxt, includeContro
 
   const toggleAddRemoveRow = (ingredient: string) => {
     const currentIndex = checked.indexOf(ingredient);
-    const selectedRows = [...selectedIngRows]
+    const selectedRows = [...selectedIngRows];
     if (currentIndex === -1) {
       ingRows.forEach(row => {
-      if (ingredient === row.ingredient) selectedRows.push(row);
+        if (ingredient === row.name) selectedRows.push(row);
       });
     } else {
       selectedRows.splice(currentIndex, 1);
     }
     setSelectedIngRows(selectedRows);
+  }
+
+  const toggleIncludeAllPantryIngredients = () => {
+    if (!allIngredientsSelected) {
+      const allIngredientNames = ingRows.map(row => row.name)
+      setChecked(allIngredientNames);
+      setAllIngredientsSelected(true);
+    } else if (allIngredientsSelected && !commonIngredientsSelected) {
+      setChecked([]);
+      setAllIngredientsSelected(false);
+    } else if (allIngredientsSelected && commonIngredientsSelected) {
+      const updatedChecked = checked.filter(ing => commonIngredientRows.map(row => row.name).includes(ing));
+      setChecked(updatedChecked);
+      setAllIngredientsSelected(false);
+    }
+  }
+
+  const toggleIncludeCommonIngredients = () => {
+    if (!commonIngredientsSelected) {
+      const commonIngredientsNames = commonIngredientRows.map(row => row.name);
+      const updatedCheckedSet: Set<string> = new Set([...checked, ...commonIngredientsNames]);
+      const updatedChecked: string[] = Array.from(updatedCheckedSet);
+      setChecked(updatedChecked);
+      setCommonIngredientsSelected(true);
+    } else if (commonIngredientsSelected && !allIngredientsSelected) {
+      setCommonIngredientsSelected(false);
+      const updatedChecked = checked.filter(ing => !commonIngredientRows.map(row => row.name).includes(ing));
+      setChecked(updatedChecked);
+
+    }
   }
 
   const handleOpen = () => setOpen(true);
@@ -76,7 +117,7 @@ const AddIngredientModal = ({infoText, pantry, btnText, searchTxt, includeContro
       <Modal
         open={open}
         onClose={handleClose}
-        arial-labelledby='modal-add-ingredients'
+        aria-labelledby='modal-add-ingredients'
         aria-describedby='modal-add-ingredients-here'
       >
         <Box sx={modalStyle}>
@@ -84,15 +125,15 @@ const AddIngredientModal = ({infoText, pantry, btnText, searchTxt, includeContro
             ingredients={ingredients}
             checked={checked}
             setChecked={setChecked}
-            handleToggle={handleToggle}
+            handleToggleChecked={handleToggleChecked}
             toggleAddRemoveRow={toggleAddRemoveRow}
             justify='center'
             searchTxt={searchTxt}
             />
           {includeControls && 
             <FormGroup sx={{flexDirection: 'row', alignItems: 'center', padding:'2em'}}>
-              <FormControlLabel control={<Switch defaultChecked />} label='Include common ingredients'/> 
-              <FormControlLabel control={<Switch />} label='Include all pantry ingredients'/> 
+              <FormControlLabel control={<Switch defaultChecked onChange={toggleIncludeCommonIngredients} />} label='Include common ingredients'/> 
+              <FormControlLabel control={<Switch onChange={toggleIncludeAllPantryIngredients}/>} label='Include all pantry ingredients'/> 
             </FormGroup> || 
             <Box padding='1em' ></Box>}
           <IngredientsAccordion checked={checked} columns={pantryColumns} selectedIngRows={selectedIngRows} toggleAddRemoveRow={toggleAddRemoveRow} />
