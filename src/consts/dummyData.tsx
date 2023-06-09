@@ -1,8 +1,10 @@
 import { ReactNode } from 'react';
 import { GridColDef, GridRowsProp } from '@mui/x-data-grid';
 import Icon from '@mdi/react';
-import { Button } from '@mui/material';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import { mdiGlasses } from '@mdi/js';
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccounts';
 import { mdiNutrition, mdiNoodles, mdiBowlMix, mdiTestTube } from '@mdi/js';
 
 export interface viewMocksInterface {
@@ -49,31 +51,78 @@ export const viewMocks: viewMocksInterface[] = [
 //sidebar width
 export const drawerWidth = 290;
 
+interface tabMock {
+  id: string, 
+  icon: ReactNode,
+  label: string,
+}
+
+interface settingsMock {
+  tabsMock: tabMock[],
+}
+
+export const settingsMock: settingsMock = {
+  tabsMock: [
+    {
+      id: 'profile-section', 
+      icon: <AccountCircleOutlinedIcon />,
+      label: 'Profile',
+    },
+    {
+      id: 'theme-section',
+      icon: <DarkModeOutlinedIcon />,
+      label: 'Theme',
+    },
+    
+    {
+      id: 'accessibility-section',
+      icon: <Icon size={1.1} path={mdiGlasses} />,
+      label: 'Accessibility',
+    },
+    {
+      id: 'account-info-section',
+      icon: <ManageAccountsOutlinedIcon />,
+      label: 'Account Info',
+    },
+  ]
+}
+
 
 // Pantry
 
 export const pantryColumns: GridColDef[] = [
-  {field: 'ingredient', headerName: 'Ingredient', width: 200, editable: true},
+  {field: 'name', headerName: 'Ingredient', width: 200, editable: true},
   {field: 'qt', headerName: 'Qt.', width: 50, editable: true},
   {field: 'unit', headerName: 'Unit', width: 150, editable: true},
   {field: 'location', headerName: 'Location', width: 150, editable: true},
 ];
 
 export const pantryRows: GridRowsProp = [
-  {id: 1, ingredient: 'Bread', qt: 1, unit: 'Loaf', location: 'Freezer'},
-  {id: 2, ingredient: 'Avocado', qt: 1, unit: '', location: 'Counter'},
-  {id: 3, ingredient: 'Eggs', qt: 1, unit: 'Dozen', location: 'Fridge'},
-  {id: 4, ingredient: 'Mixed Greens', qt: 1, unit:'Container', location: 'Fridge'},
-  {id: 5, ingredient: 'Salt', qt: 1, unit: 'Thighs', location: 'Fridge'},
-  {id: 6, ingredient: 'Lemon', qt: 1, unit: '', location: 'Fridge'},
-  {id: 7, ingredient: 'Rapini', qt: 1, unit: 'Bunch', location: 'Fridge'},
-  {id: 8, ingredient: 'Chuck Roast', qt: 1, unit: 'lb', location: 'Fridge'},
-  {id: 9, ingredient: 'Chicken', qt: 1, unit: 'lb', location: 'Fridge'},
+  {id: 0, name: 'Olive Oil', qt: 1, unit: '', location: 'Counter'},
+  {id: 1, name: 'Bread', qt: 1, unit: 'Loaf', location: 'Freezer'},
+  {id: 2, name: 'Avocado', qt: 1, unit: '', location: 'Counter'},
+  {id: 3, name: 'Eggs', qt: 1, unit: 'Dozen', location: 'Fridge'},
+  {id: 4, name: 'Mixed Greens', qt: 1, unit:'Container', location: 'Fridge'},
+  {id: 5, name: 'Salt', qt: 1, unit: 'Thighs', location: 'Fridge'},
+  {id: 6, name: 'Lemon', qt: 1, unit: '', location: 'Fridge'},
+  {id: 7, name: 'Rapini', qt: 1, unit: 'Bunch', location: 'Fridge'},
+  {id: 8, name: 'Chuck Roast', qt: 1, unit: 'lb', location: 'Fridge'},
+  {id: 9, name: 'Chicken', qt: 1, unit: 'lb', location: 'Fridge'},
+  {id: 11, name: 'Pepper', qt: 1, unit: '', location: 'Counter'},
+  {id: 12, name: 'Butter', qt: 1, unit: '', location: 'Counter'},
+];
+
+
+export const commonIngredientRows: GridRowsProp = [
+  {id: 14, name: 'Salt', qt: 1, unit: '', location: 'Counter'},
+  {id: 15, name: 'Pepper', qt: 1, unit: '', location: 'Counter'},
+  {id: 16, name: 'Butter', qt: 1, unit: '', location: 'Counter'},
+  {id: 17, name: 'Olive Oil', qt: 1, unit: '', location: 'Counter'},
 ];
 
 // Favorites
 
-interface favoritesInterface {
+export interface favoritesInterface {
   id: number,
   name: string,
 }
@@ -110,4 +159,5 @@ export const pantryIngredients: pantryIngredient[] = [
   'Mixed Greens',
   'Chicken',
 ];
+
 
