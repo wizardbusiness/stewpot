@@ -8,9 +8,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
-import Icon from '@mdi/react';
-import { Box, Stack } from '@mui/material';
-import { mdiPotSteam } from '@mdi/js';
 import Typography from '@mui/material/Typography';
 import {viewMocks, viewMocksInterface, drawerWidth} from './consts/dummyData.tsx';
 
@@ -54,7 +51,6 @@ export default function Sidebar() {
       <Divider></Divider>
       <List sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '2em 0 0 0'}}>
         {tabState.map((item) => (
-          <>
           <ListItem 
             key={item.id} 
             onClick={() => navigateToViews(item.route)}
@@ -66,9 +62,6 @@ export default function Sidebar() {
             </ListItemButton>
             <Divider />
           </ListItem>
-          
-          </>
-            
           ))
         }
       </List>
