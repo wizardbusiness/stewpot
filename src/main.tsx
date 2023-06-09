@@ -7,6 +7,7 @@ import FindRecipes from './views/FindRecipes.tsx';
 import RouterErrorPage from './components/RouterError.tsx';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import GenerateRecipe from './views/GenerateRecipe.tsx';
+import LandingPage from './views/LandingPage.tsx';
 
 
 const router = createBrowserRouter([
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <RouterErrorPage />,
     children: [
+      {
+        path: 'home',
+        element: <LandingPage />
+      },
       {
         path: 'favorites',
         element: <Favorites />,
