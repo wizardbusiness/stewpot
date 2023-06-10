@@ -5,7 +5,6 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import Login from './views/Login';
 import StewpotLogo from './components/svgComponents/StewpotLogo/StewpotLogo';
-import SvgGradient from './components/svgComponents/StewpotLogo/Gradient';
 import '../static/images/icons/logo/gradient.svg'
 // import { ReactComponent as StewPotLogo } from '../../static/images/icons/logo/stewpot-logo.svg'
 
