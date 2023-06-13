@@ -1,8 +1,10 @@
-import React from 'react';
+import { useSortable } from '@dnd-kit/sortable';
+import {CSS} from '@dnd-kit/utilities'
 import {Box,  Grid, Card, Stack, CardContent, CardMedia, Typography, Divider} from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
-import { favorites } from '../../consts/dummyData';
 import { StarBorder } from '@mui/icons-material';
+
+
 const cardStyle = {
   card: {
     height: 250, 
@@ -76,11 +78,20 @@ const cardStyle = {
 }
 
 const RecipeCard = ({name, id, starred}) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({id: id});
+
   return (
-        <Grid key={name} item>
+        <Grid item key={name} ref={setNodeRef} style={{transform: CSS.Transform.toString(transform)}} {...attributes} {...listeners} >
           <Card 
             variant='outlined'
             sx={cardStyle.card}
+            
           >
             <CardContent sx={cardStyle.cardContent}>
               <Stack gap={2}>
