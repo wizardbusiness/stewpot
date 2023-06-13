@@ -1,12 +1,12 @@
-import { useState, SyntheticEvent } from 'react';
+import { useState, SyntheticEvent, Dispatch, SetStateAction } from 'react';
 import { Box, TextField, Button,  } from '@mui/material';
 import { GridRowsProp } from '@mui/x-data-grid';
+import { favoritesInterface } from '../../consts/dummyData';
 
 interface SearchBarInterface {
   placeholderText: string,
-  data: GridRowsProp, 
-  dataProperty: string,
-  setResults: (results: GridRowsProp) => void;
+  dataProperty: keyof favoritesInterface;
+  setResults: Dispatch<SetStateAction<favoritesInterface[]>> | Dispatch<SetStateAction<GridRowsProp>>
 }
 
 const SearchBar = ({placeholderText, data, dataProperty, setResults} : SearchBarInterface) => {
@@ -21,9 +21,9 @@ const SearchBar = ({placeholderText, data, dataProperty, setResults} : SearchBar
 
   const handleSearchByProperty = (e: SyntheticEvent): void => {
     e.preventDefault();
-    const searchRes: GridRowsProp = data.filter(obj => {
-      const property: string = obj[dataProperty].toLowerCase();
-      const wordsInProperty = obj[dataProperty].toLowerCase().split(' ');
+    const searchRes = data.filter((obj)  => {
+      const property = obj[dataProperty].toString().toLowerCase();
+      const wordsInProperty = obj[dataProperty].toString().toLowerCase().split(' ');
       const allValidSearchCombs = new Set([...wordsInProperty, property]);    
       const searchedWords = [...allValidSearchCombs].filter((word: string) => word.startsWith(searchedStr));
       return property.includes(searchedWords[0]);
