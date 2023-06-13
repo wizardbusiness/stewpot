@@ -12,7 +12,7 @@ import '../static/images/icons/logo/gradient.svg'
 
 
 function App() {
-  const [ loggedIn, setLoggedIn ] = useState(false);
+  const [ loggedIn, setLoggedIn ] = useState(true);
 
   const handleLoginAsGuest = () => {
     setLoggedIn(true);

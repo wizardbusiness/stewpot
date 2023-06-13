@@ -4,9 +4,7 @@ import SvgStewpotLogoAnimated from '../components/svgComponents/StewpotLogo/Stew
 
 const LandingPage = () => {
   return (
-    <VisibilityManager>
       <SvgStewpotLogoAnimated className='bubbles'/>
-    </VisibilityManager>
   );
 }
 
