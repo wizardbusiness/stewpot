@@ -59,7 +59,7 @@ export default function Pantry() {
   const [ allPantryColumns, setAllPantryColumns ] = useState<GridColDef[]>([]);
   const [ allPantryRows, setAllPantryRows ] = useState<GridRowsProp>([]);
   const [ searchedPantryRows, setSearchedPantryRows ] = useState<GridRowsProp>([]);
-  const [ oldRowsLength, setOldRowsLength ] =useState<number>(0);
+  const [ oldRowsLength, setOldRowsLength ] = useState<number>(0);
 
   const addNewRow = () => {
     const updatedRows = [...allPantryRows];

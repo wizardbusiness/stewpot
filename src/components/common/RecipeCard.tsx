@@ -87,7 +87,7 @@ const RecipeCard = ({name, id, starred}) => {
   } = useSortable({id: id});
 
   return (
-        <Grid item key={name} ref={setNodeRef} style={{transform: CSS.Transform.toString(transform)}} {...attributes} {...listeners} >
+        <Grid item key={name} ref={setNodeRef} style={{transform: CSS.Transform.toString(transform), transition}} {...attributes} {...listeners} >
           <Card 
             variant='outlined'
             sx={cardStyle.card}

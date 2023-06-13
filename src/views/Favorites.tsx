@@ -1,31 +1,28 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useMemo} from 'react';
 import {
   DndContext,
   closestCenter,
   KeyboardSensor,
-  Sensor,
   PointerSensor,
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
 import {
-  arrayMove,
   horizontalListSortingStrategy,
-  verticalListSortingStrategy,
   SortableContext,
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
-
-import {Box, Grid, Typography, Stack} from '@mui/material';
+import { handleDragEnd } from '../utils/sortUtils';
+import {Box, Grid, Typography} from '@mui/material';
 import RecipeCard from '../components/common/RecipeCard';
 import SearchBar from '../components/common/SearchBar';
 import { favorites, favoritesInterface } from '../consts/dummyData';
+import { GridRowsProp } from '@mui/x-data-grid';
 
 export default function Favorites() {
   // saved recipes
   const [recipes, setRecipes ] = useState<favoritesInterface[]>(favorites);
-  const [ searchedRecipes, setSearchedRecipes ] = useState<favoritesInterface[]>([]);
-  const [ sortedRecipes, setSortedRecipes ] = useState<number[]>([1, 2, 3, 4, 5]);
+  const [ searchedRecipes, setSearchedRecipes ] = useState<favoritesInterface[]>(favorites);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -33,28 +30,6 @@ export default function Favorites() {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   )
-
-  const handleDragEnd = (e) => {
-    const {active, over} = e;
-    if (active.id !== over.id) {
-      setSortedRecipes(item => {
-        const oldIndex = item.indexOf(active.id);
-        const newIndex = item.indexOf(over.id);
-
-        return arrayMove(sortedRecipes, oldIndex, newIndex);
-      })
-    }
-  }
-
-  useEffect(() => {
-    setSearchedRecipes(recipes);
-  }, [recipes])
-
-  useEffect(() => {
-    const sortedRecipes = searchedRecipes.map(recipe => recipe.id);
-    setSortedRecipes(sortedRecipes)
-    console.log(sortedRecipes)
-  }, [searchedRecipes]);
 
   return (
     <Box sx={{padding: '2em'}}>
@@ -64,19 +39,17 @@ export default function Favorites() {
         <DndContext 
           sensors={sensors}
           collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
+          onDragEnd={(e) => handleDragEnd(e, setSearchedRecipes, searchedRecipes)}
         >
-          
           <SortableContext
-            items={sortedRecipes}
+            items={searchedRecipes.map(recipe => recipe.id)}
             strategy={horizontalListSortingStrategy}
           >
             <Grid container gap={5}>
-            {sortedRecipes.map((id, index) => (
-            <RecipeCard key={id} id={id} starred/>
+              {searchedRecipes.map((recipe) => (
+            <RecipeCard key={recipe.id} id={recipe.id} name={recipe.name} starred/>
           ))}
-            </Grid>
-          
+            </Grid>    
           </SortableContext>
           
           
