@@ -1,12 +1,33 @@
 import { GridColDef, GridRowsProp } from '@mui/x-data-grid';
 import { Action } from '@reduxjs/toolkit';
+import { newRow } from '../../consts/interfaces/pantry';
+import { Button } from '@mui/material';
 
-const initialState = {
+interface state  {
+  pantryColumns: GridColDef[],
+  pantryRows: GridRowsProp,
+  commonIngredients: string[]
+}
+
+const initialState: state = {
   pantryColumns: [
     {field: 'name', headerName: 'Ingredient', width: 200, editable: true},
     {field: 'qt', headerName: 'Qt.', width: 50, editable: true},
     {field: 'unit', headerName: 'Unit', width: 150, editable: true},
     {field: 'location', headerName: 'Location', width: 150, editable: true},
+    {
+      field: 'delete', 
+      headerName: '', 
+      width: 150, 
+      renderCell: (cellValues) => {
+        return (
+          <Button
+            variant='contained'
+          >Delete</Button>
+
+        )
+      }
+    }
   ],
   pantryRows: [
     {id: 0, name: 'Olive Oil', qt: 1, unit: '', location: 'Counter'},
@@ -28,10 +49,16 @@ const initialState = {
 const pantryReducer = (state=initialState, action) => {
   const { type, payload } = action;
   switch(type){
+    case ('pantry/addColumn'): {
+      return {
+        ...state,
+        pantryRows: payload
+      }
+    }
     case('pantry/addRow'): {
       return {
         ...state,
-        pantryRows: [...state.pantryRows, payload]
+        pantryRows: [...state.pantryRows].unshift(payload)
       }
     }
     case('pantry/removeRow'): {
