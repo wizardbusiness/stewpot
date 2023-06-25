@@ -1,35 +1,21 @@
 import { GridColDef, GridRowsProp } from '@mui/x-data-grid';
-import { Action } from '@reduxjs/toolkit';
-import { newRow } from '../../consts/interfaces/pantry';
+import { useDispatch } from 'react-redux'
 import { Button } from '@mui/material';
 
 interface state  {
-  pantryColumns: GridColDef[],
-  pantryRows: GridRowsProp,
+  ingredientRows: GridRowsProp,
+  ingredientColumns: GridColDef[],
   commonIngredients: string[]
 }
 
 const initialState: state = {
-  pantryColumns: [
+  ingredientColumns: [
     {field: 'name', headerName: 'Ingredient', width: 200, editable: true},
     {field: 'qt', headerName: 'Qt.', width: 50, editable: true},
     {field: 'unit', headerName: 'Unit', width: 150, editable: true},
     {field: 'location', headerName: 'Location', width: 150, editable: true},
-    {
-      field: 'delete', 
-      headerName: '', 
-      width: 150, 
-      renderCell: (cellValues) => {
-        return (
-          <Button
-            variant='contained'
-          >Delete</Button>
-
-        )
-      }
-    }
   ],
-  pantryRows: [
+  ingredientRows: [
     {id: 0, name: 'Olive Oil', qt: 1, unit: '', location: 'Counter'},
     {id: 1, name: 'Bread', qt: 1, unit: 'Loaf', location: 'Freezer'},
     {id: 2, name: 'Avocado', qt: 1, unit: '', location: 'Counter'},
@@ -58,19 +44,20 @@ const pantryReducer = (state=initialState, action) => {
     case('pantry/addRow'): {
       return {
         ...state,
-        pantryRows: [...state.pantryRows].unshift(payload)
+        ingredientRows: [payload, ...state.ingredientRows]
       }
     }
     case('pantry/removeRow'): {
+      console.log(payload)
       return {
         ...state,
-        pantryRows: state.pantryRows.filter(row => row.id !== payload)
+        ingredientRows: state.ingredientRows.filter(row => row.id !== payload)
       }
     }
     case('pantry/editRow'): {
       return {
         ...state,
-        pantryRows: state.pantryRows.map(row => row.id === payload.id ? payload : row)
+        ingredientRows: state.ingredientRows.map(row => row.id === payload.id ? payload : row)
       }
     }
     default: {
