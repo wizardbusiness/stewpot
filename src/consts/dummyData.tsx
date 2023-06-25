@@ -6,6 +6,7 @@ import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import { mdiGlasses } from '@mdi/js';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccounts';
 import { mdiNutrition, mdiNoodles, mdiBowlMix, mdiTestTube } from '@mdi/js';
+import { Button } from '@mui/material';
 
 export interface viewMocksInterface {
   id: number;
@@ -95,6 +96,19 @@ export const pantryColumns: GridColDef[] = [
   {field: 'qt', headerName: 'Qt.', width: 50, editable: true},
   {field: 'unit', headerName: 'Unit', width: 150, editable: true},
   {field: 'location', headerName: 'Location', width: 150, editable: true},
+  {
+    field: 'delete', 
+    headerName: '', 
+    width: 150, 
+    renderCell: (cellValues) => {
+      return (
+        <Button
+          variant='contained'
+        >Delete</Button>
+
+      )
+    }
+  }
 ];
 
 export const pantryRows: GridRowsProp = [
