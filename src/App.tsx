@@ -21,13 +21,14 @@ function App() {
   return (
     <>
         <CssBaseline />
-        <GlobalStyles styles={{ html: {height: '100%', overflow: 'hidden'}}} />
         {loggedIn ? (
           <Box sx={{display: 'flex'}}>
             <Sidebar />
             <Box sx={{ maxHeight: '100%', display: 'flex', flexDirection: 'column', flexGrow: 1}}>
               <Header />
-              <Outlet />
+              <Box sx={{padding: '2em', margin: '1em', marginTop: 0}}>
+                <Outlet />
+              </Box>
             </Box> 
           </Box>
           ) : (
