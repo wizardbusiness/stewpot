@@ -6,10 +6,10 @@ import { favoritesInterface } from '../../consts/dummyData';
 interface SearchBarInterface {
   placeholderText: string,
   dataProperty: keyof favoritesInterface;
-  setResults: Dispatch<SetStateAction<favoritesInterface[]>> | Dispatch<SetStateAction<GridRowsProp>>
+  setSearchResults: Dispatch<SetStateAction<favoritesInterface[]>> | Dispatch<SetStateAction<GridRowsProp>>
 }
 
-const SearchBar = ({placeholderText, data, dataProperty, setResults} : SearchBarInterface) => {
+const SearchBar = ({placeholderText, data, dataProperty, setSearchResults} : SearchBarInterface) => {
 
   const [ searchedStr, setSearchedStr ] = useState<string> ('');
   const trackerUserInput = (e: SyntheticEvent): void => {
@@ -28,7 +28,7 @@ const SearchBar = ({placeholderText, data, dataProperty, setResults} : SearchBar
       const searchedWords = [...allValidSearchCombs].filter((word: string) => word.startsWith(searchedStr));
       return property.includes(searchedWords[0]);
     });
-    setResults(searchRes);
+    setSearchResults(searchRes);
     return;
   };
 
