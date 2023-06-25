@@ -32,7 +32,7 @@ export default function Favorites() {
   )
 
   return (
-    <Box sx={{padding: '2em'}}>
+    <>
       <Typography paddingBottom='0.5em' color='#616161' variant='h2'>Favorites</Typography>
       <SearchBar placeholderText='Search Recipes' data={recipes} dataProperty='name' setResults={setSearchedRecipes} />
       <Box sx={{width: '100%', height: '2em'}}/>
@@ -54,7 +54,7 @@ export default function Favorites() {
           
           
         </DndContext>
-    </Box>
+    </>
     
   )
 }
