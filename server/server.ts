@@ -51,7 +51,7 @@ app.use('*', async (req, res) => {
 
 app.use(
   '/',
-  (err: ServerError, req: Request, res: Response, next: NextFunction) => {
+  (err, req, res, next) => {
     const defaultErr = {
       log: 'Express error handler caught unknown middleware error',
       status: 400,
