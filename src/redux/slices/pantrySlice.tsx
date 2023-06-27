@@ -29,7 +29,7 @@ const initialState: state = {
     {id: 11, name: 'Pepper', qt: 1, unit: '', location: 'Counter'},
     {id: 12, name: 'Butter', qt: 1, unit: '', location: 'Counter'},
   ],
-  commonIngredients: ['salt', 'pepper', 'butter', 'olive oil'],
+  commonIngredients: ['Salt', 'Pepper', 'Butter', 'Olive Oil'],
 };
 
 const pantryReducer = (state=initialState, action) => {
