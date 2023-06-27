@@ -1,7 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {  Box, TextField, Button, Typography, } from '@mui/material';
+import chefAI from '../../server/gpt/chefAI';
+
 
 function GenerateRecipe() {
+
+  const [ prompt, setPrompt ] = useState<string>();
+  const [ response, setResponse ] = useState<string>();
+
+  const handleSubmitRequest = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/generate');
+    } catch(error) {
+      console.error(error);
+    }
+  }
+
+
   return (
     <>
       <Typography paddingBottom='0.5em' color='#616161' variant='h2'>Generate Recipe</Typography> 
