@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   DndContext,
   closestCenter,
@@ -29,12 +30,13 @@ import SearchBar from '../components/common/SearchBar';
 import { pantryRows, pantryColumns, commonIngredientRows, favorites, favoritesInterface } from '../consts/dummyData'; // dummy data
 import { handleDragEnd } from '../utils/sortUtils';
 
-export default function FindRecipes() {
-  const [ selectedColumns, setSelectedColumns ] = useState<GridColDef[]>([]);
-  const [ selectedIngredients, setSelectedIngredients] = useState<GridRowsProp> ([]);
-  const [ recipes, setRecipes ] = useState<favoritesInterface[]>(favorites);
-  const [ searchedRecipes, setSearchedRecipes ] = useState<favoritesInterface[]>(favorites);
 
+export default function FindRecipes() {
+
+  const rows = useSelector(state => state.pantry.ingredientRows);
+
+  const [ recipes, setRecipes ] = useState<favoritesInterface[]>([]);
+  const [ searchedRecipes, setSearchedRecipes ] = useState<favoritesInterface[]>();
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -44,51 +46,66 @@ export default function FindRecipes() {
   );
 
 
-  useEffect(() => {
-    // show only relevant ingredient info in data grid
-    const relevantIngredientInfo: GridRowsProp = pantryRows.map((ingInfo) => {
-      return ({
-        id: ingInfo.id,
-        name: ingInfo.ingredient,
-        qt: ''
-      })
-    });
+  // useEffect(() => {
+  //   // show only relevant ingredient info in data grid
+  //   const relevantIngredientInfo: GridRowsProp = pantryRows.map((ingInfo) => {
+  //     return ({
+  //       id: ingInfo.id,
+  //       name: ingInfo.ingredient,
+  //       qt: ''
+  //     })
+  //   });
 
-    const relevantCols: GridColDef[] = pantryColumns.filter(cols => cols.field === 'ingredient' || cols.field === 'qt');
-    setSelectedIngredients(relevantIngredientInfo);
-    setSelectedColumns(relevantCols);
+  //   const relevantCols: GridColDef[] = pantryColumns.filter(cols => cols.field === 'ingredient' || cols.field === 'qt');
+  //   setSelectedIngredients(relevantIngredientInfo);
+  //   setSelectedColumns(relevantCols);
     
-  }, []);
+  // }, []);
 
   useEffect(() => {
     setSearchedRecipes(recipes)
   }, [recipes]);
+
 
   // find recipe view
   return (
     <>
       <Typography paddingBottom='0.5em' color='#616161' variant='h2'>Find Recipes</Typography>
 
-      <AddIngredientModal infoText='Get Started &gt;' pantry={false} btnText='+ Add Ingredients From Pantry' searchTxt='Search Pantry' includeControls/>
+      <AddIngredientModal 
+        rows={rows} 
+        infoText='Get Started &gt;' 
+        pantry={false} btnText='+ Add Ingredients From Pantry' 
+        searchTxt='Search Pantry' 
+        setRecipes={setRecipes} 
+        includeControls
+      />
       
       <Box sx={{padding: '1em'}}>
         <SearchBar placeholderText='Search Recipe Results' data={recipes} dataProperty='name' setResults={setSearchedRecipes} />
       </Box>
-      <DndContext
+      {/* <DndContext
       sensors={sensors}
       onDragEnd={(e) => handleDragEnd(e, setSearchedRecipes, searchedRecipes)}
       >
       <SortableContext
         items={searchedRecipes.map(recipe => recipe.id)}
         strategy={horizontalListSortingStrategy}
-      >
+      > */}
+      {recipes && 
       <Grid container gap={5}>
-      {searchedRecipes.map(recipe => (
-        <RecipeCard key={recipe.id} name={recipe.name} id={recipe.id} starred={false}/>
-      ))};
+      {recipes.map((recipe, index) => {
+        console.log(recipe)
+      return (
+        <RecipeCard key={recipe.id} name={recipe.name} id={recipe.id} starred={false} image={recipe.image}/>
+      )
+      }
+      
+      )}
       </Grid>
-      </SortableContext>
-      </DndContext>
+      }
+      {/* </SortableContext>
+      </DndContext> */}
     </>
   )
 }
