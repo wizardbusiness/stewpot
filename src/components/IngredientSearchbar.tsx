@@ -13,6 +13,7 @@ import {
 import { Autocomplete } from '@mui/material/';
 
 const SearchBar = ({ingredients, checked, setChecked, handleToggleChecked, toggleAddRemoveRow, justify, searchTxt}) => {
+
   
   return (
     <Stack direction='row' justifyContent={justify} sx={{ width: '100%' }}>
