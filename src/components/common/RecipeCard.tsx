@@ -1,8 +1,10 @@
+import React, { useState } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities'
-import {Box,  Grid, Card, Stack, CardContent, CardMedia, Typography, Divider} from '@mui/material';
+import {Box,  Grid, Card, Stack, CardContent, CardMedia, Typography, Divider, Modal} from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import { StarBorder } from '@mui/icons-material';
+import RecipeCardExpanded from './RecipeCardExpanded';
 
 
 const cardStyle = {
@@ -12,6 +14,11 @@ const cardStyle = {
     border: '1px solid #fbc34b',
     borderRadius: '15px',
     boxShadow: '2px 2px 6px darkgrey',
+  },
+  modalClickArea: {
+    height: 250,
+    width: 250,
+    position: 'absolute',
   },
   cardContent: {
     position: 'relative',
@@ -77,7 +84,11 @@ const cardStyle = {
   
 }
 
-const RecipeCard = ({name, id, starred}) => {
+const RecipeCard = ({name, id, starred, image}) => {
+
+  // opens and closes expanded recipe card
+  const [ open, setOpen ] = useState<boolean>(false);
+
   const {
     attributes,
     listeners,
@@ -86,20 +97,33 @@ const RecipeCard = ({name, id, starred}) => {
     transition,
   } = useSortable({id: id});
 
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
         <Grid item key={name} ref={setNodeRef} style={{transform: CSS.Transform.toString(transform), transition}} {...attributes} {...listeners} >
-          <Card 
+          <Modal 
+          open={open}
+          onClose={handleClose}
+          aria-labelledby='recipe information'
+          aria-describedby='A recipe card containing all information about the selected recipe.'
+          >
+            <Box>
+              <RecipeCardExpanded name={name} image={image} />
+            </Box>
+          </Modal>
+          <Card
             variant='outlined'
             sx={cardStyle.card}
-            
           >
             <CardContent sx={cardStyle.cardContent}>
+              <Box sx={cardStyle.modalClickArea} onDoubleClick={handleOpen}></Box>
               <Stack gap={2}>
                 <Box sx={cardStyle.recipeHeading}>
                   <Typography variant='h6' >{name}</Typography>
 
                 </Box>
-                <Divider color='lightgrey' ></Divider>
+                <Divider color='lightgrey'></Divider>
                 {/* <Box sx={cardStyle.recipeDescription}>
                   <Typography>Delicious salmon filet with pine nuts and fresh spring greens</Typography>
                 </Box> */}
@@ -107,7 +131,7 @@ const RecipeCard = ({name, id, starred}) => {
               {starred ? <StarIcon fontSize='large' sx={cardStyle.star} /> : <StarBorder fontSize='large' sx={cardStyle.star} />}
               <CardMedia 
                 sx={cardStyle.cardMedia}
-                image={`../../static/images/mockImages/stock-img-${id}.jpg`}
+                image={image}
                 title={name}
               />
             </CardContent>
