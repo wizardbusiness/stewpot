@@ -45,7 +45,6 @@ function App() {
               //   backgroundPositionY: '100'
               // }}
             > 
-
               <Box 
                   position='fixed'
                   zIndex={1}
