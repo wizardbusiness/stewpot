@@ -8,7 +8,8 @@ import {
 import { ExpandMore } from '@mui/icons-material';
 import { DataGrid, useGridApiRef, GridRowsProp } from '@mui/x-data-grid';
 
-const IngredientsAccordion = ({checked, selectedIngRows, columns, toggleAddRemoveRow}) => {
+const IngredientsAccordion = ({checked, selectedRows, columns, toggleAddRemoveRow}) => {
+
 
   return (
     <Accordion sx={{maxHeight: '100%'}}>
@@ -21,7 +22,7 @@ const IngredientsAccordion = ({checked, selectedIngRows, columns, toggleAddRemov
       </AccordionSummary>
       <AccordionDetails sx={{maxHeight: 225, overflow: 'scroll'}}>
         {checked.length > 0 ? 
-          <DataGrid columns={columns} rows={selectedIngRows} hideFooter sx={{maxHeight: '10%'}}/> :
+          <DataGrid columns={columns} rows={selectedRows} hideFooter sx={{maxHeight: '10%'}}/> :
           <Typography sx={{display: 'flex', justifyContent:'center', color: "#acacac"}}>No Ingredients Selected</Typography>
         }
       </AccordionDetails>
