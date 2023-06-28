@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import React, {useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, 
   Button, 
@@ -12,8 +12,10 @@ import { Box,
 import { GridRowsProp } from '@mui/x-data-grid';
 import IngredientSearchbar from '../IngredientSearchbar';
 import IngredientsAccordion from './IngredientsAccordion';
-import { pantryIngredients, pantryIngredient, pantryRows, commonIngredientRows, pantryColumns } from '../../consts/dummyData';
-import { common } from '@mui/material/colors';
+import { commonIngredientRows, pantryColumns } from '../../consts/dummyData';
+import { addIngredientModalProps, ingredientInterface, recipeInterface } from '../../consts/interfaces/componentInterfaces';
+import { RootState } from '../../consts/interfaces/reduxInterfaces';
+
 
 const modalStyle = {
   position: 'absolute',
@@ -28,8 +30,10 @@ const modalStyle = {
   padding: '3em',
 }
 
-const AddIngredientModal = ({rows, btnText, searchTxt, setRecipes, includeControls}) => {
-  const commonIngredients = useSelector(state => state.pantry.commonIngredients);
+
+
+const AddIngredientModal = ({rows, btnText, searchText, setRecipes}: addIngredientModalProps) => {
+  const commonIngredients = useSelector((state: RootState) => state.pantry.commonIngredients);
   const [ open, setOpen] = useState(false);
   const [ selectedRows, setselectedRows ] = useState<GridRowsProp>([]);
   const [ commonIngredientsSelected, setCommonIngredientsSelected ] = useState<boolean>(true);
@@ -51,23 +55,21 @@ const AddIngredientModal = ({rows, btnText, searchTxt, setRecipes, includeContro
     `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientString}&number=3&ranking=2&ignorePantry=true&apiKey=1cf74764dbd24013935cf83c45275579`
   )
     .then((response) => response.json())
-    .then((recipes) => {
+    .then((response) => {
+      const recipes = response;
       // array of all filtered recipes to be sent to frontend
-      const filteredRecipes: (object | null)[] = [];
       // array of all recipe requests that need to be made
-      const recipeRequests = [];
+      const recipeRequests: Promise<recipeInterface[]>[] = [];
 
       // iterate through recipes
-      recipes.forEach((recipe) => {
-        // map missing ingredients into comma seperated string to be displayed on frontend.
-        const missingIngredients: string = recipe.missedIngredients
-          .map((ingredientObj) => ingredientObj.originalName)
-          .join(' ');
-        // store all ingredients, including missing ingredients into another comma seperated string to be displayed on frontend.
-        const allIngredients: string = recipe.ingredientList
-        // make array of recipes to be requested, passing in recipe id, missingIngredients and allIngredients
+      recipes.forEach((recipe: recipeInterface) => {
+        const id: number = recipe.id
+        const missingIngredients: ingredientInterface[] = recipe.missedIngredients
+        const allIngredients: ingredientInterface[] = recipe.ingredients
+        // make a promise array of recipes to be requested
+        // pass in recipe id, missingIngredients and allIngredients since those aren't on the recipe response. 
         recipeRequests.push(
-          fetchRecipes(recipe.id, missingIngredients, allIngredients)
+          fetchRecipes(id, missingIngredients, allIngredients)
         );
       });
       // resolve all promises and return result.
@@ -82,46 +84,81 @@ const AddIngredientModal = ({rows, btnText, searchTxt, setRecipes, includeContro
 
         });
       // =============================================================================================================
-      // helper function to pull recipes by id recieved on initial fetch, filter them, and add them to filteredRecipes
+      // helper function to pull recipes by id recieved on initial fetch, filter them, and add them to recipes
       // note: unreachable if arrow function.
       // =============================================================================================================
       function fetchRecipes(
         recipeId: number,
-        missingIngredients: string,
-        allIngredients: string,
+        missingIngredients: ingredientInterface[],
+        allIngredients: ingredientInterface[],
       ) {
         // fetch individual recipe by id (pulled from initial fetch)
         return fetch(
           `https://api.spoonacular.com/recipes/${recipeId}/information?includeNutrition=false&apiKey=1cf74764dbd24013935cf83c45275579`
         )
           .then((response) => response.json())
-          .then((recipeInfo) => {
+          .then((response) => {
             // destructure additional needed properties from incoming response.
             const {
               id,
-              sourceUrl,
-              readyInMinutes,
               image,
-              servings,
               title,
-            }: filteredRecipe = recipeInfo;
-            //  create recipe object to be pushed to filteredRecipes
-            const filteredRecipe: filteredRecipeResponse = {
-              id: id,
-              name: title,
-              image: image,
-              // url: sourceUrl,
-              // allIngredients: allIngredients,
-              // missingIngredients: missingIngredients,
-              // title: title,
-              // readyIn: readyInMinutes,
-              // img: image,
-              // servings: servings,
-            };
+              servings,
+              readyInMinutes,
+              license,
+              sourceName,
+              sourceUrl,
+              pricePersServing,
+              cheap,
+              dairyFree,
+              glutenFree,
+              ketogenic,
+              vegan,
+              vegetarian,
+              veryHealthy,
+              veryPopular,
+              whole30,
+              weightWatcherSmarPoints,
+              dishTypes,
+              sustainable,
+              instructions,
+              diets,
+              creditsText,
+             } = response;
+
+             const recipeInfo = {
+              id,
+              image,
+              title,
+              servings,
+              readyInMinutes,
+              license,
+              sourceName,
+              sourceUrl,
+              pricePersServing,
+              cheap,
+              dairyFree,
+              glutenFree,
+              ketogenic,
+              vegan,
+              vegetarian,
+              veryHealthy,
+              veryPopular,
+              whole30,
+              weightWatcherSmarPoints,
+              dishTypes,
+              sustainable,
+              instructions,
+              diets,
+              creditsText,
+              missingIngredients,
+              allIngredients
+             }
+
             // push the full list of recipe properties to filtered recipes.
-            filteredRecipes.push(filteredRecipe);
+            recipes.push(recipeInfo);
             // return out the filtered recipes.
-            return filteredRecipes;
+            return recipes;
           })
           .catch((err) => {
             console.log('line 73', err);
@@ -205,14 +242,13 @@ const AddIngredientModal = ({rows, btnText, searchTxt, setRecipes, includeContro
             handleToggleChecked={handleToggleChecked}
             toggleAddRemoveRow={toggleAddRemoveRow}
             justify='center'
-            searchTxt={searchTxt}
+            searchTxt={searchText}
             />
-          {includeControls && 
             <FormGroup sx={{flexDirection: 'row', alignItems: 'center', padding:'2em'}}>
               <FormControlLabel control={<Switch defaultChecked onChange={toggleIncludeCommonIngredients} />} label='Include common ingredients'/> 
               <FormControlLabel control={<Switch onChange={toggleIncludeAllPantryIngredients}/>} label='Include all pantry ingredients'/> 
             </FormGroup> || 
-            <Box padding='1em' ></Box>}
+            <Box padding='1em' ></Box>
           <IngredientsAccordion checked={checked} columns={pantryColumns} selectedRows={selectedRows} toggleAddRemoveRow={toggleAddRemoveRow} />
           <Box sx={{width: '100%', height: '100', alignItems: 'flex-end', justifyContent: 'flex-end', padding: '1em'}}>
             <Button size='large' variant='contained' onClick={getRecipes}>Add Ingredients</Button>          
