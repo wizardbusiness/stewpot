@@ -1,6 +1,7 @@
-import {useState} from 'react'
+import {CSSProperties} from 'react'
+import { PoppedBubbleProps } from '../../../consts/interfaces/componentInterfaces';
 
-const PoppedBubble = ({popped, animDur, animDela, offset, classNmPop, classNmUnPop}) => {
+const PoppedBubble = ({popped, animDur, animDela, offset, classNmPop, classNmUnPop}: PoppedBubbleProps) => {
   
 
   return (
@@ -11,7 +12,7 @@ const PoppedBubble = ({popped, animDur, animDela, offset, classNmPop, classNmUnP
           '--animdur': `${animDur}s`,
           // '--animdela': `${animDela}s`,
           visibility: popped ? 'visible' : 'hidden',
-        }}
+        } as CSSProperties}
       >
           <path
             d={`M${808 + offset.x} ${643.3}c0 10.8 1.7 31.7 3.7 31.7s3.7-20.9 3.7-31.7-1.7-12.7-3.7-12.7-3.7 1.9-3.7 12.7zM${773.2 + offset.x} ${684.2}c10.8 0 31.7-1.7 31.7-3.7s-20.9-3.7-31.7-3.7-12.7 1.7-12.7 3.7 1.9 3.7 12.7 3.7zM${850.9 + offset.x} ${676.8}c-10.8 0-31.7 1.7-31.7 3.7s20.9 3.7 31.7 3.7 12.7-1.7 12.7-3.7-1.9-3.7-12.7-3.7zM${815.4 + offset.x} ${718.8}c0-10.8-1.7-31.7-3.7-31.7s-3.7 20.9-3.7 31.7 1.7 12.7 3.7 12.7 3.7-1.9 3.7-12.7z`}

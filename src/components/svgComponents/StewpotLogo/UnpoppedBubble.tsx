@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 import { UnpoppedBubbleProps } from "../../../consts/interfaces/componentInterfaces";
 
-const UnpoppedBubble = ({bubble, animDur, offset, handlePopBubble, setBubble, setPopped, setCycleEnd, classNmUnPop}: UnpoppedBubbleProps) => {
+const UnpoppedBubble = ({bubble, animDur, offset, handlePopBubble, setBubble, setPopped, setCycleEnd, classNmUnPop, animDela}: UnpoppedBubbleProps) => {
   return (
     <g className={classNmUnPop} 
         style={{
@@ -34,4 +34,4 @@ const UnpoppedBubble = ({bubble, animDur, offset, handlePopBubble, setBubble, se
   )
 }
 
-export default UnpoppedBubble
+export default UnpoppedBubble;

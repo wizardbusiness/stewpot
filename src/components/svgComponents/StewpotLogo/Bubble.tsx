@@ -7,18 +7,17 @@ import { BubbleProps } from '../../../consts/interfaces/componentInterfaces';
 
 const Bubble = ({animDur, animDela, offset, classNmPop, classNmUnPop }: BubbleProps) => {
 
-  const [ bubble, setBubble ] = useState(true);
-  const [ popped, setPopped ] = useState(false);
-  const [ cycleEnd, setCycleEnd ] = useState(false);
-  const [ hideBubble, setHideBubble ] = useState(true);
+  const [ bubble, setBubble ] = useState<boolean>(true);
+  const [ popped, setPopped ] = useState<boolean>(false);
+  const [ cycleEnd, setCycleEnd ] = useState<boolean>(false);
+  const [ hideBubble, setHideBubble ] = useState<boolean>(true);
 
   useEffect(() => {
     const bubbleTimer = setTimeout(() => setHideBubble(false), animDela * 1000);
     return () => clearTimeout(bubbleTimer);
   }, [animDela])
   
-  const handlePopBubble = () => {
-    console.log('pop')
+  const handlePopBubble = (): void => {
     setPopped(true);
     setBubble(false);
   };
@@ -44,11 +43,12 @@ const Bubble = ({animDur, animDela, offset, classNmPop, classNmUnPop }: BubblePr
             animDur={animDur} 
             animDela={animDela}
             offset={offset}
+            classNmPop={classNmPop}
+            classNmUnPop={classNmUnPop}
             handlePopBubble={handlePopBubble}
             setBubble={setBubble}
             setPopped={setPopped}
             setCycleEnd={setCycleEnd}
-            classNmUnPop={classNmUnPop}
           />
         }
         {!cycleEnd && 
