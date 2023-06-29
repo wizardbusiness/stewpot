@@ -138,34 +138,34 @@ export const commonIngredientRows: GridRowsProp = [
 
 export interface favoritesInterface {
   id: number,
-  name: string,
+  title: string,
   image: string
 }
 
 export const favorites: favoritesInterface[] = [
   {
     id: 1,
-    name: 'Salmon Filet with Asparagus',
+    title: 'Salmon Filet with Asparagus',
     image: '',
   },
   {
     id: 2,
-    name: 'Barley Beef Stew',
+    title: 'Barley Beef Stew',
     image: '',
   },
   {
     id: 3,
-    name: 'Terriyaki Short Ribs',
+    title: 'Terriyaki Short Ribs',
     image: '',
   },
   {
     id: 4,
-    name: 'Turmeric Chicken Soup',
+    title: 'Turmeric Chicken Soup',
     image: '',
   },
   {
     id: 5,
-    name: 'Pot Roast with Potatoes',
+    title: 'Pot Roast with Potatoes',
     image: '',
   },
 ];
