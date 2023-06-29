@@ -1,7 +1,11 @@
-import { createStore } from "redux";
-import rootReducer from "./rootReducer";
+import { configureStore } from "@reduxjs/toolkit";
+import pantryReducer from "./slices/pantrySlice";
+import { TypedUseSelectorHook, useDispatch, useSelector  } from "react-redux";
 
-
-const store = createStore(rootReducer);
+const store = configureStore({
+  reducer: {
+    pantry: pantryReducer
+  }
+});
 
 export default store;
