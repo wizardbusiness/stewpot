@@ -1,8 +1,10 @@
 import React, {useState, useCallback} from 'react';
-import { DataGrid, GridColDef, GridRowsProp, GridPreProcessEditCellProps, GridRenderEditCellParams, GridEditInputCell} from '@mui/x-data-grid';
+import { DataGrid, GridPreProcessEditCellProps, GridRenderEditCellParams, GridEditInputCell} from '@mui/x-data-grid';
 import Tooltip, {tooltipClasses, TooltipProps} from '@mui/material/Tooltip';
 import { Box, Button, Typography, styled} from '@mui/material';
 import { yellow } from '@mui/material/colors';
+import { IngredientDataGridInterface } from '../../consts/interfaces/componentInterfaces';
+
 
 const StyledDataGrid = styled(DataGrid)(({theme}) => ({
   '& .super-row-theme--new-rows': {
@@ -41,7 +43,7 @@ const renderEditIngredient = (params: GridRenderEditCellParams) => {
   return (<IngredientEditInputCell {...params} />)
 }
 
-const IngredientDataGrid = ({rows, columns}) => {
+const IngredientDataGrid = ({rows, columns}: IngredientDataGridInterface) => {
 
   const preProcessEditCellProps = (params: GridPreProcessEditCellProps) => {
     const validateRow = (ing: string) => {
