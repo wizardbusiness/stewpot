@@ -1,12 +1,13 @@
-const UnpoppedBubble = ({bubble, animDur, animDela, offset, handlePopBubble, setBubble, setPopped, setCycleEnd, classNmUnPop}) => {
+import { CSSProperties } from 'react';
+import { UnpoppedBubbleProps } from "../../../consts/interfaces/componentInterfaces";
 
-  const calculatedOffset = offset;
+const UnpoppedBubble = ({bubble, animDur, offset, handlePopBubble, setBubble, setPopped, setCycleEnd, classNmUnPop}: UnpoppedBubbleProps) => {
   return (
     <g className={classNmUnPop} 
         style={{
           '--animdur': `${animDur}s`,
           // '--animdela': `${animDela}s`,
-        }}
+        } as CSSProperties}
         onAnimationEnd={() => {
         setBubble(true);
         setPopped(false);
