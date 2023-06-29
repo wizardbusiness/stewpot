@@ -65,3 +65,21 @@ export interface IngredientsAccordionProps {
 export interface RecipeCardProps extends recipeInterface {
   starred: boolean,
 }
+
+// svg components
+
+export interface bubbleInfoInterface {
+  x: number,
+  y: number,
+}
+
+export interface BubbleProps {
+  animDur: number,
+  animDela: number,
+  offset: bubbleInfoInterface
+  classNmPop: string,
+  classNmUnPop: string
+}
+
+
+
