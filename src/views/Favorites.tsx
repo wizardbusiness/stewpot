@@ -1,4 +1,4 @@
-import {useState, useEffect, useMemo} from 'react';
+import {useState} from 'react';
 import {
   DndContext,
   closestCenter,
@@ -16,13 +16,13 @@ import { handleDragEnd } from '../utils/sortUtils';
 import {Box, Grid, Typography} from '@mui/material';
 import RecipeCard from '../components/common/RecipeCard';
 import SearchBar from '../components/common/SearchBar';
-import { favorites, favoritesInterface } from '../consts/dummyData';
-import { GridRowsProp } from '@mui/x-data-grid';
+import { favorites} from '../consts/dummyData';
+import { recipeInterface } from '../consts/interfaces/componentInterfaces';
 
 export default function Favorites() {
   // saved recipes
-  const [recipes, setRecipes ] = useState<favoritesInterface[]>(favorites);
-  const [ searchedRecipes, setSearchedRecipes ] = useState<favoritesInterface[]>(favorites);
+  const [recipes, setRecipes ] = useState<recipeInterface[]>(favorites);
+  const [ searchedRecipes, setSearchedRecipes ] = useState<recipeInterface[]>(favorites);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -34,7 +34,7 @@ export default function Favorites() {
   return (
     <>
       <Typography paddingBottom='0.5em' color='#616161' variant='h2'>Favorites</Typography>
-      <SearchBar placeholderText='Search Recipes' data={recipes} dataProperty='name' setResults={setSearchedRecipes} />
+      <SearchBar placeholderText='Search Recipes' recipes={recipes} setResults={setSearchedRecipes} />
       <Box sx={{width: '100%', height: '2em'}}/>
         <DndContext 
           sensors={sensors}
@@ -47,7 +47,7 @@ export default function Favorites() {
           >
             <Grid container gap={5}>
               {searchedRecipes.map((recipe) => (
-            <RecipeCard key={recipe.id} id={recipe.id} name={recipe.name} image={`../../static/images/mockImages/stock-img-${recipe.id}.jpg`} starred/>
+            <RecipeCard key={recipe.id} id={recipe.id} name={recipe.title} image={`../../static/images/mockImages/stock-img-${recipe.id}.jpg`} starred/>
           ))}
             </Grid>    
           </SortableContext>
