@@ -6,10 +6,10 @@ import {
   Typography,
 } from "@mui/material";
 
-const AccountInfo = ({sectionHeaderStyle}) => {
+const AccountInfo = () => {
   return (
     <Stack id='account-info-section'>
-      <Typography sx={sectionHeaderStyle}>Account Info</Typography>
+      <Typography fontSize='2em'>Account Info</Typography>
       <Grid container gap={1} paddingTop={2} paddingBottom={2}>
         <Grid item md={2}>
           <Typography>Email</Typography>

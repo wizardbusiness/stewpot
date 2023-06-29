@@ -25,10 +25,10 @@ import {
     }
  }
 
-const Profile = ({sectionHeaderStyle, avatarSrc, handleUploadAvatar}) => {
+const Profile = ({avatarSrc, handleUploadAvatar}) => {
   return (
     <Stack id='profile-section' gap={3}>
-      <Typography sx={sectionHeaderStyle}>Profile</Typography>
+      <Typography fontSize='2em'>Profile</Typography>
         <Stack direction='row' gap={2} alignItems='center'>               
           <Typography>Avatar:</Typography>
           <Box display='flex'>

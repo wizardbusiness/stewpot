@@ -6,10 +6,10 @@ import {
   Checkbox
  } from "@mui/material";
 
-const Accessibility = ({sectionHeaderStyle}) => {
+const Accessibility = () => {
   return (
     <Stack id='accessibility-section' gap={2}>
-      <Typography sx={sectionHeaderStyle}>Accessibility Options</Typography>
+      <Typography fontSize='2em'>Accessibility Options</Typography>
       <Box sx={{width: 300}}>
         <Typography variant='h6'>Font Size</Typography>
         <Stack direction='row' alignItems='center' gap={2}>
