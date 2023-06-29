@@ -2,11 +2,7 @@ import { GridColDef, GridRowsProp } from '@mui/x-data-grid';
 import { useDispatch } from 'react-redux'
 import { Button } from '@mui/material';
 
-interface state  {
-  ingredientRows: GridRowsProp,
-  ingredientColumns: GridColDef[],
-  commonIngredients: string[]
-}
+
 
 const initialState: state = {
   ingredientColumns: [
