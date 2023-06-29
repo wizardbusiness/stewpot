@@ -1,15 +1,11 @@
-import { useState, useEffect, useMemo, Fragment } from "react";
+import { useState } from "react";
 import Bubble from "./Bubble";
 import './StewPotLogo.css';
+import { bubbleInfoInterface } from "../../../consts/interfaces/componentInterfaces";
 
-interface bubbleInfo {
-  x: number,
-  y: number,
-}
+const SvgStewpotLogoAnimate = ({...props}) => {
 
-const SvgStewpotLogoAnimate = (props) => {
-
-  const [bubbleInfo, setBubbleInfo ] = useState<bubbleInfo[]>([
+  const [bubbleInfo, setBubbleInfo ] = useState<bubbleInfoInterface[]>([
     {x: 0, y: 0}, 
     {x: 150, y: 150},
     {x: 0, y: 0}, 
@@ -32,8 +28,7 @@ const SvgStewpotLogoAnimate = (props) => {
       x={0}
       y={0}
       style={{
-        enableBackground: "new 0 0 1920 1080",
-        transform: 'translateY(-40px)'
+        transform: 'translateY(-65px)'
       }}
       viewBox="0 0 1920 1080"
       {...props}
