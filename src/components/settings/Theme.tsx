@@ -7,10 +7,10 @@ import {
   Radio
  } from "@mui/material";
 
-const Theme = ({sectionHeaderStyle}) => {
+const Theme = () => {
   return (
     <Stack id='theme-section'>
-      <Typography sx={sectionHeaderStyle}>Theme</Typography>
+      <Typography fontSize='2em'>Theme</Typography>
       <Stack>
         <Typography>Choose Theme: </Typography>
         <FormControl>
