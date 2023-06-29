@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import {  Box, TextField, Button, Typography, } from '@mui/material';
 import chefAI from '../../server/gpt/chefAI';
 
-
 function GenerateRecipe() {
-
   const [ prompt, setPrompt ] = useState<string>();
   const [ response, setResponse ] = useState<string>();
 
