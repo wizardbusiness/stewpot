@@ -9,6 +9,7 @@ import {
  } from "@mui/material"
 
  import UploadAvatarIcon from "../svgComponents/utility/UploadAvatar"
+import { SyntheticEvent } from "react"
 
  const profileStyles = {
     avatar: {
@@ -25,7 +26,12 @@ import {
     }
  }
 
-const Profile = ({avatarSrc, handleUploadAvatar}) => {
+interface ProfileProps {
+ avatarSrc: string,
+ handleUploadAvatar: (e: SyntheticEvent) => void;
+}
+
+const Profile = ({avatarSrc, handleUploadAvatar}: ProfileProps) => {
   return (
     <Stack id='profile-section' gap={3}>
       <Typography fontSize='2em'>Profile</Typography>
