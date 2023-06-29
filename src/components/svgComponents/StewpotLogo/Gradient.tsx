@@ -1,9 +1,8 @@
-const SvgGradient = (props) => (
+const SvgGradient = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     data-name="Layer 2"
     viewBox="0 0 601.65 601"
-    {...props}
   >
     <defs>
       <linearGradient
