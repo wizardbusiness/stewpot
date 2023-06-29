@@ -6,10 +6,10 @@ import {
   Typography 
 } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material';
-import { DataGrid, useGridApiRef, GridRowsProp } from '@mui/x-data-grid';
+import { DataGrid, useGridApiRef, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { IngredientsAccordionProps } from '../../consts/interfaces/componentInterfaces';
 
-const IngredientsAccordion = ({checked, selectedRows, columns, toggleAddRemoveRow}) => {
-
+const IngredientsAccordion = ({checked, selectedRows, columns, toggleAddRemoveRow}: IngredientsAccordionProps) => {
 
   return (
     <Accordion sx={{maxHeight: '100%'}}>
