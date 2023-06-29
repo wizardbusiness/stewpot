@@ -5,6 +5,7 @@ import {Box,  Grid, Card, Stack, CardContent, CardMedia, Typography, Divider, Mo
 import StarIcon from '@mui/icons-material/Star';
 import { StarBorder } from '@mui/icons-material';
 import RecipeCardExpanded from './RecipeCardExpanded';
+import { RecipeCardProps } from '../../consts/interfaces/componentInterfaces';
 
 
 const cardStyle = {
@@ -81,10 +82,9 @@ const cardStyle = {
     color: '#fbc34b',
     transform: 'translateX(5%) translateY(10%)'
   }
-  
 }
 
-const RecipeCard = ({name, id, starred, image}) => {
+const RecipeCard = ({starred, id, title, image, ...recipe}: RecipeCardProps) => {
 
   // opens and closes expanded recipe card
   const [ open, setOpen ] = useState<boolean>(false);
@@ -101,7 +101,7 @@ const RecipeCard = ({name, id, starred, image}) => {
   const handleClose = () => setOpen(false);
 
   return (
-        <Grid item key={name} ref={setNodeRef} style={{transform: CSS.Transform.toString(transform), transition}} {...attributes} {...listeners} >
+        <Grid item key={title} ref={setNodeRef} style={{transform: CSS.Transform.toString(transform), transition}} {...attributes} {...listeners} >
           <Modal 
           open={open}
           onClose={handleClose}
@@ -109,7 +109,7 @@ const RecipeCard = ({name, id, starred, image}) => {
           aria-describedby='A recipe card containing all information about the selected recipe.'
           >
             <Box>
-              <RecipeCardExpanded name={name} image={image} />
+              <RecipeCardExpanded id={id} title={title} image={image} {...recipe}  />
             </Box>
           </Modal>
           <Card
@@ -120,7 +120,7 @@ const RecipeCard = ({name, id, starred, image}) => {
               <Box sx={cardStyle.modalClickArea} onDoubleClick={handleOpen}></Box>
               <Stack gap={2}>
                 <Box sx={cardStyle.recipeHeading}>
-                  <Typography variant='h6' >{name}</Typography>
+                  <Typography variant='h6' >{title}</Typography>
 
                 </Box>
                 <Divider color='lightgrey'></Divider>
@@ -132,7 +132,7 @@ const RecipeCard = ({name, id, starred, image}) => {
               <CardMedia 
                 sx={cardStyle.cardMedia}
                 image={image}
-                title={name}
+                title={title}
               />
             </CardContent>
           </Card>
