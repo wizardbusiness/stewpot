@@ -1,4 +1,6 @@
-const StewpotLogo = (props) => (
+import { CSSProperties } from "react";
+
+const StewpotLogo = ({height, width, color}: CSSProperties ) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
@@ -6,11 +8,13 @@ const StewpotLogo = (props) => (
     id="stewpot-logo_svg__Layer_1"
     x={0}
     y={0}
-    style={props.style}
+    style={{
+      height: height,
+      width: width,
+      fill: color
+    }}
     viewBox="0 0 911 911"
-    {...props}
   >
-    <style>{`.stewpot-logo_svg__st1{fill:${props.color}}`}</style>
     <g id="stewpot-logo_svg__Object">
       <g id="stewpot-logo_svg__Bubbles">
         <path
