@@ -47,7 +47,7 @@ export default function Favorites() {
           >
             <Grid container gap={5}>
               {searchedRecipes.map((recipe) => (
-            <RecipeCard key={recipe.id} id={recipe.id} name={recipe.title} image={`../../static/images/mockImages/stock-img-${recipe.id}.jpg`} starred/>
+            <RecipeCard key={recipe.id} id={recipe.id} title={recipe.title} image={`../../static/images/mockImages/stock-img-${recipe.id}.jpg`} starred/>
           ))}
             </Grid>    
           </SortableContext>

@@ -40,9 +40,12 @@ export default function FindRecipes() {
       {recipes && 
         <Grid container gap={5}>
           {recipes.map((recipe) => {
-            console.log(recipe)
             return (
-              <RecipeCard key={recipe.id} name={recipe.title} id={recipe.id} starred={false} image={recipe.image}/>
+              <RecipeCard 
+              key={recipe.id} 
+              starred
+              {...recipe}
+              />
             )
           })}
         </Grid>
