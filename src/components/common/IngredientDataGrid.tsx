@@ -3,7 +3,7 @@ import { DataGrid, GridPreProcessEditCellProps, GridRenderEditCellParams, GridEd
 import Tooltip, {tooltipClasses, TooltipProps} from '@mui/material/Tooltip';
 import { Box, Button, Typography, styled} from '@mui/material';
 import { yellow } from '@mui/material/colors';
-import { IngredientDataGridInterface } from '../../consts/interfaces/componentInterfaces';
+import { IngredientDataGridProps } from '../../consts/interfaces/componentInterfaces';
 
 
 const StyledDataGrid = styled(DataGrid)(({theme}) => ({
@@ -43,7 +43,7 @@ const renderEditIngredient = (params: GridRenderEditCellParams) => {
   return (<IngredientEditInputCell {...params} />)
 }
 
-const IngredientDataGrid = ({rows, columns}: IngredientDataGridInterface) => {
+const IngredientDataGrid = ({rows, columns}: IngredientDataGridProps) => {
 
   const preProcessEditCellProps = (params: GridPreProcessEditCellProps) => {
     const validateRow = (ing: string) => {
