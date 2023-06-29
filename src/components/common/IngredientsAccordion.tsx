@@ -6,7 +6,7 @@ import {
   Typography 
 } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material';
-import { DataGrid, useGridApiRef, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { IngredientsAccordionProps } from '../../consts/interfaces/componentInterfaces';
 
 const IngredientsAccordion = ({checked, selectedRows, columns, toggleAddRemoveRow}: IngredientsAccordionProps) => {
