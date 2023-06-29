@@ -1,15 +1,14 @@
 import { useState, SyntheticEvent, Dispatch, SetStateAction } from 'react';
 import { Box, TextField, Button,  } from '@mui/material';
-import { GridRowsProp } from '@mui/x-data-grid';
-import { favoritesInterface } from '../../consts/dummyData';
+import { recipeInterface } from '../../consts/interfaces/componentInterfaces';
 
 interface SearchBarInterface {
   placeholderText: string,
-  dataProperty: keyof favoritesInterface;
-  setSearchResults: Dispatch<SetStateAction<favoritesInterface[]>> | Dispatch<SetStateAction<GridRowsProp>>
+  recipes: recipeInterface[],
+  setResults: Dispatch<SetStateAction<recipeInterface[]>>
 }
 
-const SearchBar = ({placeholderText, data, dataProperty, setSearchResults} : SearchBarInterface) => {
+const SearchBar = ({placeholderText, recipes, setResults} : SearchBarInterface) => {
 
   const [ searchedStr, setSearchedStr ] = useState<string> ('');
   const trackerUserInput = (e: SyntheticEvent): void => {
@@ -19,16 +18,17 @@ const SearchBar = ({placeholderText, data, dataProperty, setSearchResults} : Sea
     setSearchedStr(searchStr);
   };
 
+  // only searches by title right now, would like to be able to search by other properties.
   const handleSearchByProperty = (e: SyntheticEvent): void => {
     e.preventDefault();
-    const searchRes = data.filter((obj)  => {
-      const property = obj[dataProperty].toString().toLowerCase();
-      const wordsInProperty = obj[dataProperty].toString().toLowerCase().split(' ');
+    const searchRes = recipes.filter((recipe)  => {
+      const property = recipe.title.toString().toLowerCase();
+      const wordsInProperty = recipe.title.toString().toLowerCase().split(' ');
       const allValidSearchCombs = new Set([...wordsInProperty, property]);    
       const searchedWords = [...allValidSearchCombs].filter((word: string) => word.startsWith(searchedStr));
       return property.includes(searchedWords[0]);
     });
-    setSearchResults(searchRes);
+    setResults(searchRes);
     return;
   };
 
