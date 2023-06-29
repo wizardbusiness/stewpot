@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {SyntheticEvent, useState} from 'react';
 import { 
   Box,  
   Modal, 
@@ -78,9 +78,12 @@ const UserSettings = () => {
   const handleDontSaveChanges = () => setSaveChanges(false);
 
 
-  const handleUploadAvatar = (e) => {
-      const avatarUrl = URL.createObjectURL(e.target.files[0])
-      setAvatarSrc(avatarUrl);
+  const handleUploadAvatar = (e: SyntheticEvent): void => {
+      const target = e.target as HTMLInputElement;
+      if (target.files) {
+        const avatarUrl = URL.createObjectURL(target.files[0])
+        setAvatarSrc(avatarUrl);
+      }
   }
 
   return (
@@ -130,30 +133,25 @@ const UserSettings = () => {
                 </List>
               </Toolbar>
             </Box>
-            <Box sx={settingStyles.content} overflow='scroll'>
-              <Stack>
-                <Profile 
-                  sectionHeaderStyle={settingStyles.content.sectionHeader} 
-                  handleUploadAvatar={handleUploadAvatar} 
-                  avatarSrc={avatarSrc} 
-                />
-                <Divider sx={{padding: '1em'}} />
-                <Theme sectionHeaderStyle={settingStyles.content.sectionHeader} />
-                <Divider sx={{padding: '1em'}} />
-                <Accessibility sectionHeaderStyle={settingStyles.content.sectionHeader}/>
-                <Divider sx={{padding: '1em'}} />   
-                <AccountInfo sectionHeaderStyle={settingStyles.content.sectionHeader} />  
-              </Stack>
-              <Button 
-                variant='contained' 
-                sx={{position: 'absolute', top: '92%', left: '88%'}}
-                onClick={handleClose}
-              >
-                  Save & Exit
-                </Button>
-              
-
-            </Box>
+            <Stack sx={settingStyles.content} overflow='scroll'>
+              <Profile 
+                handleUploadAvatar={handleUploadAvatar} 
+                avatarSrc={avatarSrc} 
+              />
+              <Divider sx={{padding: '1em'}} />
+              <Theme />
+              <Divider sx={{padding: '1em'}} />
+              <Accessibility />
+              <Divider sx={{padding: '1em'}} />   
+              <AccountInfo />  
+            </Stack>
+            <Button 
+              variant='contained' 
+              sx={{position: 'absolute', top: '92%', left: '88%'}}
+              onClick={handleClose}
+            >
+              Save & Exit
+            </Button>
           </Box>
         </Box>
       </Modal>
