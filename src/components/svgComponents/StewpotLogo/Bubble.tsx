@@ -1,8 +1,11 @@
 import {useState, useEffect} from 'react'
 import PoppedBubble from './PoppedBubble';
 import UnpoppedBubble from './UnpoppedBubble';
+import { BubbleProps } from '../../../consts/interfaces/componentInterfaces';
 
-const Bubble = ({animDur, animDela, offset, classNmPop, classNmUnPop }) => {
+
+
+const Bubble = ({animDur, animDela, offset, classNmPop, classNmUnPop }: BubbleProps) => {
 
   const [ bubble, setBubble ] = useState(true);
   const [ popped, setPopped ] = useState(false);
