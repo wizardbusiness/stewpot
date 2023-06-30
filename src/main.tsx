@@ -1,15 +1,15 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import store from './redux/store.ts';
+import store from './redux/store';
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx';
-import Favorites from './views/Favorites.tsx';
-import Pantry from './views/Pantry.tsx';
-import FindRecipes from './views/FindRecipes.tsx';
-import RouterErrorPage from './components/RouterError.tsx';
+import App from './App';
+import Favorites from './views/Favorites';
+import Pantry from './views/Pantry';
+import FindRecipes from './views/FindRecipes';
+import RouterErrorPage from './components/RouterError';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import GenerateRecipe from './views/GenerateRecipe.tsx';
-import LandingPage from './views/LandingPage.tsx';
+import GenerateRecipe from './views/GenerateRecipe';
+import LandingPage from './views/LandingPage';
 
 
 const router = createBrowserRouter([
