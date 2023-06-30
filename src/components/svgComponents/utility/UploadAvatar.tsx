@@ -1,5 +1,9 @@
-import * as React from "react";
-const UploadAvatarIcon = (props) => (
+
+interface UploadAvatarIconProps {
+  height: number;
+  width: number;
+}
+const UploadAvatarIcon = ({height, width}: UploadAvatarIconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
@@ -7,10 +11,10 @@ const UploadAvatarIcon = (props) => (
     x={0}
     y={0}
     style={{
-      // enableBackground: "new 0 0 100 100",
+      height: height,
+      width: width,
     }}
     viewBox="0 0 100 100"
-    {...props}
   >
     <style>
       {
