@@ -1,7 +1,6 @@
-import React, {useState, useCallback} from 'react';
 import { DataGrid, GridPreProcessEditCellProps, GridRenderEditCellParams, GridEditInputCell} from '@mui/x-data-grid';
 import Tooltip, {tooltipClasses, TooltipProps} from '@mui/material/Tooltip';
-import { Box, Button, Typography, styled} from '@mui/material';
+import { Box, styled} from '@mui/material';
 import { yellow } from '@mui/material/colors';
 import { IngredientDataGridProps } from '../../consts/interfaces/componentInterfaces';
 
