@@ -44,7 +44,7 @@ const Profile = ({avatarSrc, handleUploadAvatar}: ProfileProps) => {
             component='label'
             sx={{transform: 'translateY(35%) translateX(-70%)'}}
             > 
-              <UploadAvatarIcon style={profileStyles.addAvatarIcon}/>               
+              <UploadAvatarIcon height={25} width={25}/>               
               <input 
                 hidden
                 type='file'
