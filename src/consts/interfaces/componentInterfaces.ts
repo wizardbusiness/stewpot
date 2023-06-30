@@ -99,4 +99,14 @@ export interface UnpoppedBubbleProps extends BubbleProps {
   setCycleEnd: SetStateBoolean;
 }
 
+export interface HelperModalProps {
+  open: boolean;
+  textContent: string,
+  saveBtnText: string,
+  exitBtnText: string,
+  handleCloseDialog: () => Dispatch<SetStateAction<boolean>>
+  handleCloseSettings: () => Dispatch<SetStateAction<boolean>>
+  handleSaveChanges: () => Dispatch<SetStateAction<boolean>>
+  handleDontSaveChanges: () => Dispatch<SetStateAction<boolean>>
+}
 

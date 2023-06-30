@@ -4,6 +4,7 @@ import {
   Button,
   Typography
 } from "@mui/material"
+import { HelperModalProps } from "../../consts/interfaces/componentInterfaces";
 
 const modalStyles = {
   height: '15%',
@@ -19,7 +20,8 @@ const modalStyles = {
 
 }
 
-const HelperModal = ({open, textContent, handleCloseDialog, handleCloseSettings, handleSaveChanges, handleDontSaveChanges, saveBtnText, exitBtnText }) => {
+
+const HelperModal = ({open, textContent, handleCloseDialog, handleCloseSettings, handleSaveChanges, handleDontSaveChanges, saveBtnText, exitBtnText }: HelperModalProps) => {
   return (
     <Modal 
       open={open}
