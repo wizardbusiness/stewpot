@@ -1,29 +1,27 @@
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useEffect, useCallback, SyntheticEvent} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { Box, TextField, Button, Typography, styled} from '@mui/material';
 import Tooltip, {tooltipClasses, TooltipProps} from '@mui/material/Tooltip';
 import { DeleteOutline } from '@mui/icons-material';
-import { GridRowsProp, GridColumnHeaderParams} from '@mui/x-data-grid';
+import { GridRowsProp, GridColumnHeaderParams, GridRenderCellParams, GridRowId} from '@mui/x-data-grid';
 import SearchBar from '../components/common/SearchBar';
 import IngredientDataGrid from '../components/common/IngredientDataGrid';
 import { newRow } from '../consts/interfaces/pantry';
-import { RootState, AppDispatch } from '../consts/interfaces/redux';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import PantrySearchBar from '../components/PantrySearchBar';
 
 // ingredient data for datagrid
 
 
 export default function Pantry() {
 
-  const selectColumns = (state: RootState) => state.pantry.ingredientColumns;
-  const selectRows = (state: RootState) => state.pantry.ingredientRows;
+  const columns = useAppSelector((state) => state.pantry.ingredientColumns);
+  const rows = useAppSelector((state) => state.pantry.ingredientRows); 
 
-  const rows = useSelector(selectRows);
-  const columns = useSelector(selectColumns);
+  const [ searchedRows, setSearchedRows ] = useState<GridRowsProp>(rows);
 
-  const [ searchedRows, setSearchedRows ] = useState(rows);
-
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
 
   const handleAddNewRow = () => {
@@ -39,7 +37,8 @@ export default function Pantry() {
     setSearchedRows([newRow, ...searchedRows])
   }
 
-  const handleDeleteRow = (e, id: number) => {
+  const handleDeleteRow = (e: SyntheticEvent, id: GridRowId) => {
+    e.preventDefault();
     dispatch({type: 'pantry/removeRow', payload: id});
     setSearchedRows(searchedRows.filter(row => row.id !== id));
   }
@@ -47,8 +46,8 @@ export default function Pantry() {
   const pantryColumns = [...columns, {
     headerAlign: 'center',
     field: '',
-    renderHeader: (params: GridColumnHeaderParams) => <DeleteOutline />,
-    renderCell: (cellParams) => {
+    renderHeader: () => <DeleteOutline />,
+    renderCell: (cellParams: GridRenderCellParams) => {
       return (
         <Button
           variant='outlined'
@@ -65,7 +64,7 @@ export default function Pantry() {
   return (  
     <>
       <Typography flexShrink={1} color='#616161' variant='h2'>Pantry</Typography>
-      <SearchBar placeholderText='Search Ingredients' data={rows} dataProperty='name' setSearchResults={setSearchedRows} />
+      <PantrySearchBar placeholderText='Search Ingredients' ingredients={rows} setResults={setSearchedRows} />
       <Button variant='contained' onClick={handleAddNewRow}>+ Add New Ingredient</Button>
       <IngredientDataGrid rows={searchedRows} columns={pantryColumns}/>
       <Outlet />
