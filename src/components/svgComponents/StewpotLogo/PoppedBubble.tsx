@@ -3,7 +3,6 @@ import { PoppedBubbleProps } from '../../../consts/interfaces/componentInterface
 
 const PoppedBubble = ({popped, animDur, animDela, offset, classNmPop, classNmUnPop}: PoppedBubbleProps) => {
   
-
   return (
     <g 
         className={`${classNmUnPop}`}
