@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import {useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, 
   Button, 
@@ -7,7 +7,6 @@ import { Box,
   FormGroup, 
   FormControlLabel, 
   Switch, 
-  Typography
 } from '@mui/material';
 import { GridRowsProp } from '@mui/x-data-grid';
 import IngredientSearchbar from '../IngredientSearchbar';
@@ -64,7 +63,7 @@ const AddIngredientModal = ({rows, btnText, searchText, setRecipes}: addIngredie
       // iterate through recipes
       recipes.forEach((recipe: recipeInterface) => {
         const id: number = recipe.id
-        const missingIngredients: ingredientInterface[] = recipe.missedIngredients
+        const missingIngredients: ingredientInterface[] | undefined = recipe.missedIngredients
         const allIngredients: ingredientInterface[] = recipe.ingredients
         // make a promise array of recipes to be requested
         // pass in recipe id, missingIngredients and allIngredients since those aren't on the recipe response. 
@@ -89,7 +88,7 @@ const AddIngredientModal = ({rows, btnText, searchText, setRecipes}: addIngredie
       // =============================================================================================================
       function fetchRecipes(
         recipeId: number,
-        missingIngredients: ingredientInterface[],
+        missingIngredients: ingredientInterface[] | undefined,
         allIngredients: ingredientInterface[],
       ) {
         // fetch individual recipe by id (pulled from initial fetch)
@@ -241,7 +240,6 @@ const AddIngredientModal = ({rows, btnText, searchText, setRecipes}: addIngredie
             setChecked={setChecked}
             handleToggleChecked={handleToggleChecked}
             toggleAddRemoveRow={toggleAddRemoveRow}
-            justify='center'
             searchTxt={searchText}
             />
             <FormGroup sx={{flexDirection: 'row', alignItems: 'center', padding:'2em'}}>
