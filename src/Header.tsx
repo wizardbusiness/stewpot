@@ -1,10 +1,6 @@
-import { useState } from 'react';
-import { Avatar, Box, AppBar, Typography, Toolbar, Stack, Menu, MenuItem, IconButton, Button, Link, Divider } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
-import Icon from '@mdi/react';
-import { mdiPotSteam } from '@mdi/js';
+import { Avatar, Box, AppBar, Typography, Toolbar, Stack, Link } from "@mui/material";
+import StewpotLogo from './components/svgComponents/StewpotLogo/StewPotLogo';
 import { drawerWidth } from "./consts/dummyData";
-import SvgStewpotLogo from './components/svgComponents/StewpotLogo/StewpotLogo';
 import Settings from './components/settings/Settings';
 
 
@@ -27,18 +23,6 @@ const headerStyles = {
 
 export default function Header() {
 
-  const [menuAnchorEl, setMenuAnchorEl ] = useState<null | HTMLElement>(null);
-
-  const menuOpen = Boolean(menuAnchorEl);
-
-  const handleMenuClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setMenuAnchorEl(e.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setMenuAnchorEl(null);
-  };
-
   return (
     <Box sx={{display: 'flex', justifyContent: 'flex-start'}}>
       <AppBar sx={{ height: '10%', width: `calc(100% - ${drawerWidth}px)`}}>
@@ -46,7 +30,7 @@ export default function Header() {
           <Link href='home' underline='none' sx={{display: 'flex', color: 'white'}}>
             <Typography fontWeight={300} lineHeight='2em' fontSize='3em'>StewPot</Typography>
             {/* <Icon color='#FFF' size={3.5} path={mdiPotSteam}/> */}
-            <SvgStewpotLogo color='white' style={{height: 50, width: 50, transform: 'translateY(20px)', fill: 'white'}}/> 
+            <StewpotLogo color='white' height={70} width={70} transform='translateY(5px)'/> 
           </Link>
             <Box display='flex' flexDirection='column' >
               <Typography>Hi, Gabriel!</Typography>
@@ -54,28 +38,6 @@ export default function Header() {
             <Stack direction='row' alignItems='center' gap={2}> 
               <Avatar />
               <Settings /> 
-              {/* <IconButton 
-                id='menu-button'
-                aria-controls={menuOpen ? 'menu-button' : undefined}
-                aria-haspopup='true'
-                aria-expanded={menuOpen ? 'true' : undefined}
-                onClick={handleMenuClick}
-              >
-              <MenuIcon fontSize='large' sx={{color: 'white'}} />
-            </IconButton>
-            <Menu
-              id='user-menu'
-              anchorEl={menuAnchorEl}
-              open={menuOpen}
-              onClose={handleMenuClose}
-            >
-              <MenuItem onClick={handleMenuClose}>Help</MenuItem>
-              <MenuItem onClick={handleMenuClose}>Settings</MenuItem>
-
-              <Divider />
-              <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
-            </Menu> */}
-
             </Stack>
             </Box>
         </Toolbar>
