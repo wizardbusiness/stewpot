@@ -1,22 +1,28 @@
-import React, {useState, useEffect, MouseEvent} from 'react'
+import { Dispatch, SetStateAction } from 'react';
 import {
   Stack, 
   Box,
-  Button, 
   TextField, 
-  ListItemButton, 
   ListItemIcon,
   Checkbox,
-  Typography,
   Chip
 } from '@mui/material';
 import { Autocomplete } from '@mui/material/';
 
-const SearchBar = ({ingredients, checked, setChecked, handleToggleChecked, toggleAddRemoveRow, justify, searchTxt}) => {
+interface IngredientSearchBarProps {
+  ingredients: string[],
+  checked: string[],
+  setChecked: Dispatch<SetStateAction<string[]>>,
+  handleToggleChecked: (ing: string) => void;
+  toggleAddRemoveRow: (ing: string) => void,
+  searchTxt: string,
+}
+
+const SearchBar = ({ingredients, checked, setChecked, handleToggleChecked, toggleAddRemoveRow, searchTxt}: IngredientSearchBarProps) => {
 
   
   return (
-    <Stack direction='row' justifyContent={justify} sx={{ width: '100%' }}>
+    <Stack direction='row' justifyContent='center' sx={{ width: '100%' }}>
     <Autocomplete
       disablePortal
       id='free-solo-ingredient-list'
