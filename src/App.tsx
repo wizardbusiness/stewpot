@@ -8,7 +8,7 @@ import StewpotLogo from './components/svgComponents/StewpotLogo/StewpotLogo';
 import '../static/images/icons/logo/gradient.svg'
 
 function App() {
-  const [ loggedIn, setLoggedIn ] = useState<boolean>(false);
+  const [ loggedIn, setLoggedIn ] = useState<boolean>(true);
 
   const handleLoginAsGuest = (): void => {
     setLoggedIn(true);
