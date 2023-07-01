@@ -14,12 +14,9 @@ const modalStyles = {
   left: '35%',
   alignItems: 'center',
   justifyContent: 'space-between',
-  
   backgroundColor: 'white',
   padding: '2em'
-
 }
-
 
 const HelperModal = ({open, textContent, handleCloseDialog, handleCloseSettings, handleSaveChanges, handleDontSaveChanges, saveBtnText, exitBtnText }: HelperModalProps) => {
   return (
@@ -29,7 +26,6 @@ const HelperModal = ({open, textContent, handleCloseDialog, handleCloseSettings,
       <Stack sx={modalStyles}>
       <Typography>{textContent}</Typography>
       <Stack direction='row' >
-        
         <Button 
           onClick={() => {
             handleCloseDialog();
