@@ -5,7 +5,6 @@ import { GridRowsProp, GridColDef } from "@mui/x-data-grid";
 // setState utility types
 type SetStateBoolean = Dispatch<SetStateAction<boolean>>
 
-
 // data interfaces
 export interface ingredientInterface {
   aisle?: string;
