@@ -1,18 +1,13 @@
-import {useState, useEffect, useCallback, SyntheticEvent} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import {useState, SyntheticEvent} from 'react';
 import { Outlet } from 'react-router-dom';
-import { Box, TextField, Button, Typography, styled} from '@mui/material';
+import { Button, Typography} from '@mui/material';
 import Tooltip, {tooltipClasses, TooltipProps} from '@mui/material/Tooltip';
 import { DeleteOutline } from '@mui/icons-material';
-import { GridRowsProp, GridColumnHeaderParams, GridRenderCellParams, GridRowId} from '@mui/x-data-grid';
-import SearchBar from '../components/common/SearchBar';
+import { GridRowsProp, GridRenderCellParams, GridRowId} from '@mui/x-data-grid';
+import PantrySearchBar from '../components/PantrySearchBar';
 import IngredientDataGrid from '../components/common/IngredientDataGrid';
 import { newRow } from '../consts/interfaces/pantry';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import PantrySearchBar from '../components/PantrySearchBar';
-
-// ingredient data for datagrid
-
 
 export default function Pantry() {
 
