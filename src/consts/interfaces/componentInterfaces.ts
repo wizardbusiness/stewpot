@@ -44,7 +44,7 @@ export interface recipeInterface {
   instructions?: string;
   diets?: string[];
   creditsText?: string;
-  ingredients: ingredientInterface[];
+  ingredients?: ingredientInterface[];
   missedIngredients?: ingredientInterface[];
 }
 
@@ -65,7 +65,7 @@ export interface IngredientsAccordionProps {
   checked: string[];
   selectedRows: GridRowsProp;
   columns: GridColDef[];
-  toggleAddRemoveRow?: () => void;
+  toggleAddRemoveRow?: (ingredient: string) => void;
 }
 
 export interface RecipeCardProps extends recipeInterface {
