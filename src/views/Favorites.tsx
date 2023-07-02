@@ -21,7 +21,7 @@ import { recipeInterface } from '../consts/interfaces/componentInterfaces';
 
 export default function Favorites() {
   // saved recipes
-  const [recipes, setRecipes ] = useState<recipeInterface[]>(favorites);
+  const [ recipes ] = useState<recipeInterface[]>(favorites);
   const [ searchedRecipes, setSearchedRecipes ] = useState<recipeInterface[]>(favorites);
 
   const sensors = useSensors(
