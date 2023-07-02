@@ -167,7 +167,11 @@ const AddIngredientModal = ({rows, btnText, searchText, setRecipes}: addIngredie
             // not returning anything in catch causes a typescript error in type of promise array (type is void or 'myInterface').
             return err;
           });
+      
       }
+    })
+    .catch((err) => {
+      console.log(err)
     })
 }
 
