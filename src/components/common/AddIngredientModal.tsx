@@ -55,41 +55,45 @@ const AddIngredientModal = ({rows, btnText, searchText, setRecipes}: addIngredie
   )
     .then((response) => response.json())
     .then((response) => {
+      // recipe basic info
       const recipes = response;
       // array of all filtered recipes to be sent to frontend
       // array of all recipe requests that need to be made
-      const recipeRequests: Promise<recipeInterface[]>[] = [];
-
+      const recipeRequests: Promise<recipeInterface>[] = [];
+      
       // iterate through recipes
       recipes.forEach((recipe: recipeInterface) => {
         const id: number = recipe.id
-        const missingIngredients: ingredientInterface[] | undefined = recipe.missedIngredients
-        const allIngredients: ingredientInterface[] = recipe.ingredients
-        // make a promise array of recipes to be requested
-        // pass in recipe id, missingIngredients and allIngredients since those aren't on the recipe response. 
+        const missedIngredients: ingredientInterface[] | undefined = recipe.missedIngredients
+        const ingredients: ingredientInterface[] | undefined = recipe.ingredients
         recipeRequests.push(
-          fetchRecipes(id, missingIngredients, allIngredients)
+          // pass in recipe id, missingIngredients and allIngredients since those aren't on this next recipe fetch response. 
+          fetchRecipes(id, missedIngredients, ingredients)
         );
       });
       // resolve all promises and return result.
       return Promise.all(recipeRequests)
-        .then((responses) => {
-          // after all promises from recipe fetches have fulfilled, send the result back to the client on res.locals
-          // sending as nested array for some reason, so just send the first element (contains actual recipe list)
-          setRecipes(responses[0])
-        })
-        .catch((err) => {
-          console.log('recipe', err);
-
-        });
+      .then((recipes) => {
+      // after all promises from recipe fetches have fulfilled, send the result back to the client on res.locals
+      // duplicate objects because promise.all returns each response object from each resolved promise into a new array, 
+      // and you were also pushing it into the original recipe array, resulting in the original response object being 
+      // included in the array being used to set the recipe state. Now the resolved promise values are simply used to set the recipe
+      // state directly. 
+      setRecipes(recipes);
+      return
+      })
+      .catch((err) => {
+        console.log('recipe', err);
+      });
+      
       // =============================================================================================================
       // helper function to pull recipes by id recieved on initial fetch, filter them, and add them to recipes
       // note: unreachable if arrow function.
       // =============================================================================================================
       function fetchRecipes(
         recipeId: number,
-        missingIngredients: ingredientInterface[] | undefined,
-        allIngredients: ingredientInterface[],
+        missedIngredients: ingredientInterface[] | undefined,
+        ingredients: ingredientInterface[] | undefined,
       ) {
         // fetch individual recipe by id (pulled from initial fetch)
         return fetch(
@@ -124,8 +128,8 @@ const AddIngredientModal = ({rows, btnText, searchText, setRecipes}: addIngredie
               diets,
               creditsText,
              } = response;
-
-             const recipeInfo = {
+             
+             const recipeInfo: recipeInterface = {
               id,
               image,
               title,
@@ -150,20 +154,21 @@ const AddIngredientModal = ({rows, btnText, searchText, setRecipes}: addIngredie
               instructions,
               diets,
               creditsText,
-              missingIngredients,
-              allIngredients
+              missedIngredients,
+              ingredients
              }
 
             // push the full list of recipe properties to filtered recipes.
-            recipes.push(recipeInfo);
             // return out the filtered recipes.
-            return recipes;
+            return recipeInfo;
           })
           .catch((err) => {
-            console.log('line 73', err);
+            console.log(err);
+            // not returning anything in catch causes a typescript error in type of promise array (type is void or 'myInterface').
+            return err;
           });
       }
-    });
+    })
 }
 
   const handleToggleChecked = (ing: string) => {
@@ -245,7 +250,7 @@ const AddIngredientModal = ({rows, btnText, searchText, setRecipes}: addIngredie
             <FormGroup sx={{flexDirection: 'row', alignItems: 'center', padding:'2em'}}>
               <FormControlLabel control={<Switch defaultChecked onChange={toggleIncludeCommonIngredients} />} label='Include common ingredients'/> 
               <FormControlLabel control={<Switch onChange={toggleIncludeAllPantryIngredients}/>} label='Include all pantry ingredients'/> 
-            </FormGroup> || 
+            </FormGroup>
             <Box padding='1em' ></Box>
           <IngredientsAccordion checked={checked} columns={pantryColumns} selectedRows={selectedRows} toggleAddRemoveRow={toggleAddRemoveRow} />
           <Box sx={{width: '100%', height: '100', alignItems: 'flex-end', justifyContent: 'flex-end', padding: '1em'}}>
