@@ -7,6 +7,8 @@ import { mdiGlasses } from '@mdi/js';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccounts';
 import { mdiNutrition, mdiNoodles, mdiBowlMix, mdiTestTube } from '@mdi/js';
 import { Button } from '@mui/material';
+import { ingredientInterface } from './interfaces/componentInterfaces';
+import { recipeInterface } from './interfaces/componentInterfaces';
 
 export interface viewMocksInterface {
   id: number;
@@ -124,6 +126,7 @@ export const pantryRows: GridRowsProp = [
   {id: 9, name: 'Chicken', qt: 1, unit: 'lb', location: 'Fridge'},
   {id: 11, name: 'Pepper', qt: 1, unit: '', location: 'Counter'},
   {id: 12, name: 'Butter', qt: 1, unit: '', location: 'Counter'},
+  {id: 13, name: 'Cheddar', qt: 1, unit: '', location: 'Fridge'}
 ];
 
 
@@ -142,7 +145,7 @@ export interface favoritesInterface {
   image: string
 }
 
-export const favorites: favoritesInterface[] = [
+export const favorites: recipeInterface[] = [
   {
     id: 1,
     title: 'Salmon Filet with Asparagus',

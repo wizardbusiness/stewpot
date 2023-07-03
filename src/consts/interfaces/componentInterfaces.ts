@@ -46,7 +46,7 @@ export interface recipeInterface {
   creditsText?: string;
   usedIngredients?: ingredientInterface[];
   missedIngredients?: ingredientInterface[];
-  extendedIngredients: ingredientInterface[];
+  extendedIngredients?: ingredientInterface[];
 }
 
 // prop interfaces
