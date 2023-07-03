@@ -43,15 +43,17 @@ const AddIngredientModal = ({rows, btnText, searchText, setRecipes}: addIngredie
   let ingredientString = '';
   // convert ingredients array in req body into web api fetch syntax.
   checked.forEach((ingredient, index) => {
+    const lcaseIngredient = ingredient.toLowerCase();
     index !== checked.length - 1
-      ? (ingredientString += `${ingredient},+`)
-      : (ingredientString += `${ingredient}`);
+      ? (ingredientString += `${lcaseIngredient},+`)
+      : (ingredientString += `${lcaseIngredient}`);
   });
+  console.log(ingredientString)
   // https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientString}&number=${numRecipes}&ranking=${ranking}&ignorePantry=${ignorePantry}&apiKey=1cf74764dbd24013935cf83c45275579
   // https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2&apiKey=13f9369a3bec409ebe5f9e90ba459277
   // number=1 in api call: minimize missing ingredients.
   fetch(
-    `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientString}&number=3&ranking=2&ignorePantry=true&apiKey=1cf74764dbd24013935cf83c45275579`
+    `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientString}&number=3&ranking=2&ignorePantry=false&apiKey=1cf74764dbd24013935cf83c45275579`
   )
     .then((response) => response.json())
     .then((response) => {
@@ -65,15 +67,16 @@ const AddIngredientModal = ({rows, btnText, searchText, setRecipes}: addIngredie
       recipes.forEach((recipe: recipeInterface) => {
         const id: number = recipe.id
         const missedIngredients: ingredientInterface[] | undefined = recipe.missedIngredients
-        const ingredients: ingredientInterface[] | undefined = recipe.ingredients
+        const usedIngredients: ingredientInterface[] | undefined = recipe.usedIngredients
         recipeRequests.push(
           // pass in recipe id, missingIngredients and allIngredients since those aren't on this next recipe fetch response. 
-          fetchRecipes(id, missedIngredients, ingredients)
+          fetchRecipes(id, missedIngredients, usedIngredients)
         );
       });
       // resolve all promises and return result.
       return Promise.all(recipeRequests)
       .then((recipes) => {
+        console.log(recipes)
       // after all promises from recipe fetches have fulfilled, send the result back to the client on res.locals
       // duplicate objects because promise.all returns each response object from each resolved promise into a new array, 
       // and you were also pushing it into the original recipe array, resulting in the original response object being 
@@ -93,7 +96,7 @@ const AddIngredientModal = ({rows, btnText, searchText, setRecipes}: addIngredie
       function fetchRecipes(
         recipeId: number,
         missedIngredients: ingredientInterface[] | undefined,
-        ingredients: ingredientInterface[] | undefined,
+        usedIngredients: ingredientInterface[] | undefined,
       ) {
         // fetch individual recipe by id (pulled from initial fetch)
         return fetch(
@@ -127,6 +130,7 @@ const AddIngredientModal = ({rows, btnText, searchText, setRecipes}: addIngredie
               instructions,
               diets,
               creditsText,
+              extendedIngredients,
              } = response;
              
              const recipeInfo: recipeInterface = {
@@ -155,7 +159,8 @@ const AddIngredientModal = ({rows, btnText, searchText, setRecipes}: addIngredie
               diets,
               creditsText,
               missedIngredients,
-              ingredients
+              usedIngredients,
+              extendedIngredients
              }
 
             // push the full list of recipe properties to filtered recipes.
