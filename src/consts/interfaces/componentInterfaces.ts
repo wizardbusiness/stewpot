@@ -44,8 +44,9 @@ export interface recipeInterface {
   instructions?: string;
   diets?: string[];
   creditsText?: string;
-  ingredients?: ingredientInterface[];
+  usedIngredients?: ingredientInterface[];
   missedIngredients?: ingredientInterface[];
+  extendedIngredients: ingredientInterface[];
 }
 
 // prop interfaces
