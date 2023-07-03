@@ -1,5 +1,6 @@
 import { GridColDef, GridRowsProp } from '@mui/x-data-grid';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
+import { PayloadAction } from '@reduxjs/toolkit';
 import { Button } from '@mui/material';
 
 
@@ -24,11 +25,13 @@ const initialState: state = {
     {id: 9, name: 'Chicken', qt: 1, unit: 'lb', location: 'Fridge'},
     {id: 11, name: 'Pepper', qt: 1, unit: '', location: 'Counter'},
     {id: 12, name: 'Butter', qt: 1, unit: '', location: 'Counter'},
+    {id: 13, name: 'Cheddar', qt: 1, unit: '', location: 'Fridge'},
+    {id: 14, name: 'Mozarella', qt: 1, unit: '', location: 'Fridge'},
   ],
   commonIngredients: ['Salt', 'Pepper', 'Butter', 'Olive Oil'],
 };
 
-const pantryReducer = (state=initialState, action) => {
+const pantryReducer = (state=initialState, action: PayloadAction) => {
   const { type, payload } = action;
   switch(type){
     case ('pantry/addColumn'): {
