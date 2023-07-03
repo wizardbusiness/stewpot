@@ -19,7 +19,6 @@ const SvgStewpotLogoAnimate = ({...props}) => {
         <Bubble key={`bubble${index}`} animDur={6} animDela={delay} offset={bubble} classNmUnPop='bubble1' classNmPop='poppedbubble1' />
     )
     });
-
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
