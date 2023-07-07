@@ -29,6 +29,7 @@ export interface recipeInterface {
   sourceName?: string;
   sourceUrl?: string;
   pricePersServing?: number;
+  description?: string;
   cheap?: boolean;
   dairyFree?: boolean;
   glutenFree?: boolean;
@@ -41,12 +42,12 @@ export interface recipeInterface {
   weightWatcherSmarPoints?: number;
   dishTypes?: string[];
   sustainable?: boolean;
-  instructions?: string;
+  instructions?: string[]; // string for spoonacular
   diets?: string[];
   creditsText?: string;
   usedIngredients?: ingredientInterface[];
   missedIngredients?: ingredientInterface[];
-  extendedIngredients?: ingredientInterface[];
+  extendedIngredients?: string[];
 }
 
 // prop interfaces
