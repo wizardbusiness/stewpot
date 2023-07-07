@@ -3,7 +3,8 @@ import ViteExpress from 'vite-express'
 import pantryRoutes from './server/routes/pantryRoutes';
 import favRoutes from './server/routes/favorites';
 import userRoutes from './server/routes/userRoutes';
-import spoonacularRoutes from './server/routes/spoonacularAPI';
+import spoonacularRoutes from './server/routes/spoonacularRoutes.js';
+import aiRoutes from './server/routes/aiRoutes.js';
 import {ServerError} from './server/types';
 
 const app = express();
@@ -19,10 +20,11 @@ const app = express();
   // app.use('/api', favRoutes);
   // app.use('/api/user', userRoutes);
   // // spoonacular routes
-  // app.use('/api', spoonacularRoutes);
+  app.use('/api', spoonacularRoutes);
+  app.use('/api', aiRoutes)
 
   // app.use(
-  //   '/',
+  //   '/api',
   //   (err: ServerError, req: Request, res: Response) => {
   //     const defaultErr = {
   //       log: 'Express error handler caught unknown middleware error',
