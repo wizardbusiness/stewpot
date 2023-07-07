@@ -1,4 +1,4 @@
-import {useState, SyntheticEvent} from 'react';
+import React, {useState, SyntheticEvent, useEffect} from 'react';
 import { Outlet } from 'react-router-dom';
 import { Button, Typography} from '@mui/material';
 import Tooltip, {tooltipClasses, TooltipProps} from '@mui/material/Tooltip';
@@ -17,7 +17,6 @@ export default function Pantry() {
   const [ searchedRows, setSearchedRows ] = useState<GridRowsProp>(rows);
 
   const dispatch = useAppDispatch();
-
 
   const handleAddNewRow = () => {
 
