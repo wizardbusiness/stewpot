@@ -1,3 +1,4 @@
+import React from 'react';
 import SvgStewpotLogoAnimated from '../components/svgComponents/StewpotLogo/StewPotLogoAnimated';
 
 const LandingPage = () => {
