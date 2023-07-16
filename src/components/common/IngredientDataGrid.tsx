@@ -1,3 +1,4 @@
+import React from 'react';
 import { DataGrid, GridPreProcessEditCellProps, GridRenderEditCellParams, GridEditInputCell} from '@mui/x-data-grid';
 import Tooltip, {tooltipClasses, TooltipProps} from '@mui/material/Tooltip';
 import { Box, styled} from '@mui/material';
@@ -22,7 +23,7 @@ const StyledDataGrid = styled(DataGrid)(({theme}) => ({
 
 const StyledRejectionTooltip = styled(({className, ...props }: TooltipProps) => (
     <Tooltip {...props} classes={{popper: className}} /> 
-  ))(({theme}) => ({
+  ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
     backgroundColor: theme.palette.error.main,
     color: theme.palette.error.contrastText
@@ -31,9 +32,10 @@ const StyledRejectionTooltip = styled(({className, ...props }: TooltipProps) => 
 
 const IngredientEditInputCell = (props: GridRenderEditCellParams) => {
   const { error } = props;
+
   return (
     <StyledRejectionTooltip open={!!error} title={error}>
-        <GridEditInputCell {...props} />
+      <span><GridEditInputCell {...props} error /></span>
     </StyledRejectionTooltip>
   )
 }
@@ -45,13 +47,13 @@ const renderEditIngredient = (params: GridRenderEditCellParams) => {
 const IngredientDataGrid = ({rows, columns}: IngredientDataGridProps) => {
 
   const preProcessEditCellProps = (params: GridPreProcessEditCellProps) => {
-    const validateRow = (ing: string) => {
-      const ingredients = rows.map(row => row.ingredient.toLowerCase());
+    const validateIng = (ing: string) => {
+      const ingredients = rows.map(row => row.name.toLowerCase());
       const exists = ingredients.includes(ing.toLowerCase());
       return (exists ? `${ing} in pantry` : null);
     }; 
     
-    const errorMessage = validateRow(params.props.value.toString());
+    const errorMessage = validateIng(params.props.value.toString());
     return { ...params.props, error: errorMessage}
   }
 
