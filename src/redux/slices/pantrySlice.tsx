@@ -1,68 +1,181 @@
-import { GridColDef, GridRowsProp } from '@mui/x-data-grid';
-import { useDispatch } from 'react-redux';
-import { PayloadAction } from '@reduxjs/toolkit';
-import { Button } from '@mui/material';
+import {
+  GridColDef,
+  GridRowsProp,
+  GridRowModel,
+  GridRowId,
+} from "@mui/x-data-grid";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import {
+  randomCreatedDate,
+  randomUpdatedDate,
+} from "@mui/x-data-grid-generator";
+import { DateTime, Interval } from "luxon";
+import { PantryState } from "../../consts/interfaces/reduxInterfaces";
+import { getPantryData, getAutocompleteData } from "../thunks/pantryThunk";
 
+const rows: GridRowsProp = [
+  {
+    id: 0,
+    name: "Olive Oil",
+    location: "Counter",
+    purchasedOn: String(new Date("09/07/23")),
+    expiresOn: String(new Date("09/08/23")),
+  },
+  {
+    id: 1,
+    name: "Bread",
+    location: "Freezer",
+    purchasedOn: String(new Date("09/07/23")),
+    expiresOn: String(new Date("12/25/23")),
+  },
+  {
+    id: 2,
+    name: "Avocado",
+    location: "Counter",
+    purchasedOn: String(randomCreatedDate()),
+    expiresOn: String(randomUpdatedDate()),
+  },
+  {
+    id: 3,
+    name: "Eggs",
+    location: "Fridge",
+    purchasedOn: String(randomCreatedDate()),
+    expiresOn: String(randomUpdatedDate()),
+  },
+  {
+    id: 4,
+    name: "Mixed Greens",
+    location: "Fridge",
+    purchasedOn: String(randomCreatedDate()),
+    expiresOn: String(randomUpdatedDate()),
+  },
+  {
+    id: 5,
+    name: "Salt",
+    location: "Fridge",
+    purchasedOn: String(randomCreatedDate()),
+    expiresOn: String(randomUpdatedDate()),
+    daysInPantry: Math.floor(
+      Interval.fromDateTimes(
+        DateTime.fromJSDate(randomCreatedDate()),
+        DateTime.now()
+      ).length("days")
+    ),
+  },
+  {
+    id: 6,
+    name: "Lemon",
+    location: "Fridge",
+    purchasedOn: String(randomCreatedDate()),
+    expiresOn: String(randomUpdatedDate()),
+  },
+  {
+    id: 7,
+    name: "Rapini",
+    location: "Fridge",
+    purchasedOn: String(randomCreatedDate()),
+    expiresOn: String(randomUpdatedDate()),
+  },
+  {
+    id: 8,
+    name: "Chuck Roast",
+    location: "Fridge",
+    purchasedOn: String(randomCreatedDate()),
+    expiresOn: String(randomUpdatedDate()),
+  },
+  {
+    id: 9,
+    name: "Chicken",
+    location: "Fridge",
+    purchasedOn: String(randomCreatedDate()),
+    expiresOn: String(randomUpdatedDate()),
+  },
+  {
+    id: 11,
+    name: "Pepper",
+    location: "Counter",
+    purchasedOn: String(randomCreatedDate()),
+    expiresOn: String(randomUpdatedDate()),
+  },
+  {
+    id: 12,
+    name: "Butter",
+    location: "Counter",
+    purchasedOn: String(randomCreatedDate()),
+    expiresOn: String(randomUpdatedDate()),
+  },
+  {
+    id: 13,
+    name: "Cheddar",
+    location: "Fridge",
+    purchasedOn: String(randomCreatedDate()),
+    expiresOn: String(randomUpdatedDate()),
+  },
+  {
+    id: 14,
+    name: "Mozarella",
+    location: "Fridge",
+    purchased: String(randomCreatedDate()),
+    expiresOn: String(randomUpdatedDate()),
+  },
+];
 
-
-const initialState: state = {
-  ingredientColumns: [
-    {field: 'name', headerName: 'Ingredient', width: 200, editable: true},
-    {field: 'qt', headerName: 'Qt.', width: 50, editable: true},
-    {field: 'unit', headerName: 'Unit', width: 150, editable: true},
-    {field: 'location', headerName: 'Location', width: 150, editable: true},
-  ],
-  ingredientRows: [
-    {id: 0, name: 'Olive Oil', qt: 1, unit: '', location: 'Counter'},
-    {id: 1, name: 'Bread', qt: 1, unit: 'Loaf', location: 'Freezer'},
-    {id: 2, name: 'Avocado', qt: 1, unit: '', location: 'Counter'},
-    {id: 3, name: 'Eggs', qt: 1, unit: 'Dozen', location: 'Fridge'},
-    {id: 4, name: 'Mixed Greens', qt: 1, unit:'Container', location: 'Fridge'},
-    {id: 5, name: 'Salt', qt: 1, unit: 'Thighs', location: 'Fridge'},
-    {id: 6, name: 'Lemon', qt: 1, unit: '', location: 'Fridge'},
-    {id: 7, name: 'Rapini', qt: 1, unit: 'Bunch', location: 'Fridge'},
-    {id: 8, name: 'Chuck Roast', qt: 1, unit: 'lb', location: 'Fridge'},
-    {id: 9, name: 'Chicken', qt: 1, unit: 'lb', location: 'Fridge'},
-    {id: 11, name: 'Pepper', qt: 1, unit: '', location: 'Counter'},
-    {id: 12, name: 'Butter', qt: 1, unit: '', location: 'Counter'},
-    {id: 13, name: 'Cheddar', qt: 1, unit: '', location: 'Fridge'},
-    {id: 14, name: 'Mozarella', qt: 1, unit: '', location: 'Fridge'},
-  ],
-  commonIngredients: ['Salt', 'Pepper', 'Butter', 'Olive Oil'],
+const initialState: PantryState = {
+  isLoading: false,
+  ingredientRows: rows,
+  autocompleteData: [],
+  commonIngredients: ["Salt", "Pepper", "Butter", "Olive Oil"],
 };
 
-const pantryReducer = (state=initialState, action: PayloadAction) => {
-  const { type, payload } = action;
-  switch(type){
-    case ('pantry/addColumn'): {
+const pantrySlice = createSlice({
+  name: "pantry",
+  initialState,
+  reducers: {
+    addRow: (state, action: PayloadAction<GridRowModel>) => {
       return {
         ...state,
-        pantryRows: payload
-      }
-    }
-    case('pantry/addRow'): {
+        ingredientRows: [action.payload, ...state.ingredientRows],
+      };
+    },
+    removeRow: (state, action: PayloadAction<GridRowId>) => {
       return {
         ...state,
-        ingredientRows: [payload, ...state.ingredientRows]
-      }
-    }
-    case('pantry/removeRow'): {
-      console.log(payload)
+        ingredientRows: state.ingredientRows.filter(
+          (row) => row.id !== action.payload
+        ),
+      };
+    },
+    editRow: (state, action: PayloadAction<GridRowModel>) => {
       return {
         ...state,
-        ingredientRows: state.ingredientRows.filter(row => row.id !== payload)
+        ingredientRows: state.ingredientRows.map((row) =>
+          row.id === action.payload.id ? action.payload : row
+        ),
+      };
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getPantryData.pending, (state) => {
+      console.log("loading");
+      state.isLoading = true;
+    });
+    builder.addCase(getPantryData.fulfilled, (state, action) => {
+      console.log("autocomplete", action.payload);
+      if (Array.isArray(action.payload)) {
+        state.ingredientRows = action.payload;
       }
-    }
-    case('pantry/editRow'): {
-      return {
-        ...state,
-        ingredientRows: state.ingredientRows.map(row => row.id === payload.id ? payload : row)
-      }
-    }
-    default: {
-      return state;
-    }
-  }
-}
-
-export default pantryReducer;
+      state.isLoading = false;
+    });
+    builder.addCase(getPantryData.rejected, (state, action) => {
+      console.log("action", action);
+      state.isLoading = false;
+      // state.error = action.error.message;
+    });
+    builder.addCase(getAutocompleteData.fulfilled, (state, action) => {
+      state.autocompleteData = action.payload;
+      
+    });
+  },
+});
+export const { addRow, removeRow, editRow } = pantrySlice.actions;
+export default pantrySlice.reducer;
