@@ -1,24 +1,30 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Bubble from "./Bubble";
-import './StewPotLogo.css';
+import "./StewPotLogo.css";
 import { bubbleInfoInterface } from "../../../consts/interfaces/componentInterfaces";
 
-const SvgStewpotLogoAnimate = ({...props}) => {
-
-  const [bubbleInfo, setBubbleInfo ] = useState<bubbleInfoInterface[]>([
-    {x: 0, y: 0}, 
-    {x: 150, y: 150},
-    {x: 0, y: 0}, 
-    {x: 300, y: 0}, 
-    {x: 150, y: 150},    
+const SvgStewpotLogoAnimate = ({ ...props }) => {
+  const [bubbleInfo, setBubbleInfo] = useState<bubbleInfoInterface[]>([
+    { x: 0, y: 0 },
+    { x: 150, y: 150 },
+    { x: 0, y: 0 },
+    { x: 300, y: 0 },
+    { x: 150, y: 150 },
   ]);
 
   const bubbles = bubbleInfo.map((bubble, index) => {
     const delay = index;
     return (
-        <Bubble key={`bubble${index}`} animDur={6} animDela={delay} offset={bubble} classNmUnPop='bubble1' classNmPop='poppedbubble1' />
-    )
-    });
+      <Bubble
+        key={`bubble${index}`}
+        animDur={6}
+        animDela={delay}
+        offset={bubble}
+        classNmUnPop="bubble1"
+        classNmPop="poppedbubble1"
+      />
+    );
+  });
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +33,7 @@ const SvgStewpotLogoAnimate = ({...props}) => {
       x={0}
       y={0}
       style={{
-        transform: 'translateY(-65px)'
+        transform: "translateY(-65px)",
       }}
       viewBox="0 0 1920 1080"
       {...props}
@@ -97,6 +103,5 @@ const SvgStewpotLogoAnimate = ({...props}) => {
       </linearGradient>
     </svg>
   );
-}
+};
 export default SvgStewpotLogoAnimate;
-

@@ -1,4 +1,4 @@
-import { useState, SyntheticEvent, Dispatch, SetStateAction } from 'react';
+import React, { useState, SyntheticEvent, Dispatch, SetStateAction } from 'react';
 import { Box, TextField, Button,  } from '@mui/material';
 import { recipeInterface } from '../../consts/interfaces/componentInterfaces';
 
