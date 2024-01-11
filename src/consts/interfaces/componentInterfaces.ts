@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
 
-import { GridRowsProp, GridColDef } from "@mui/x-data-grid";
+import { GridRowsProp, GridColDef, GridRowModel } from "@mui/x-data-grid";
 
 // setState utility types
-type SetStateBoolean = Dispatch<SetStateAction<boolean>>
+type SetStateBoolean = Dispatch<SetStateAction<boolean>>;
 
 // data interfaces
 export interface ingredientInterface {
@@ -55,12 +55,14 @@ export interface addIngredientModalProps {
   rows: GridRowsProp;
   btnText: string;
   searchText: string;
-  setRecipes: React.Dispatch<React.SetStateAction<recipeInterface[]>>
+  setRecipes: React.Dispatch<React.SetStateAction<recipeInterface[]>>;
 }
 
 export interface IngredientDataGridProps {
   rows: GridRowsProp;
-  columns: GridColDef[]
+  searchedRows: GridRowsProp;
+  setSearchedRows: Dispatch<SetStateAction<GridRowsProp>>;
+  handleEditRow: (row: GridRowModel) => GridRowModel;
 }
 
 export interface IngredientsAccordionProps {
@@ -83,13 +85,13 @@ export interface bubbleInfoInterface {
 export interface BubbleProps {
   animDur: number;
   animDela: number;
-  offset: bubbleInfoInterface
+  offset: bubbleInfoInterface;
   classNmPop: string;
-  classNmUnPop: string
+  classNmUnPop: string;
 }
 
 export interface PoppedBubbleProps extends BubbleProps {
-  popped: boolean
+  popped: boolean;
 }
 
 export interface UnpoppedBubbleProps extends BubbleProps {
@@ -102,12 +104,11 @@ export interface UnpoppedBubbleProps extends BubbleProps {
 
 export interface HelperModalProps {
   open: boolean;
-  textContent: string,
-  saveBtnText: string,
-  exitBtnText: string,
-  handleCloseDialog: () => Dispatch<SetStateAction<boolean>>
-  handleCloseSettings: () => Dispatch<SetStateAction<boolean>>
-  handleSaveChanges: () => Dispatch<SetStateAction<boolean>>
-  handleDontSaveChanges: () => Dispatch<SetStateAction<boolean>>
+  textContent: string;
+  saveBtnText: string;
+  exitBtnText: string;
+  handleCloseDialog: () => Dispatch<SetStateAction<boolean>>;
+  handleCloseSettings: () => Dispatch<SetStateAction<boolean>>;
+  handleSaveChanges: () => Dispatch<SetStateAction<boolean>>;
+  handleDontSaveChanges: () => Dispatch<SetStateAction<boolean>>;
 }
-
