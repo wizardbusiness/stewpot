@@ -1,6 +1,6 @@
-import { CSSProperties } from "react";
+import React, { CSSProperties } from "react";
 
-const StewpotLogo = ({height, width, color, transform}: CSSProperties ) => (
+const StewpotLogo = ({ height, width, color, transform }: CSSProperties) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
@@ -12,7 +12,7 @@ const StewpotLogo = ({height, width, color, transform}: CSSProperties ) => (
       height: height,
       width: width,
       fill: color,
-      transform: transform
+      transform: transform,
     }}
     viewBox="0 0 911 911"
   >
@@ -57,4 +57,3 @@ const StewpotLogo = ({height, width, color, transform}: CSSProperties ) => (
   </svg>
 );
 export default StewpotLogo;
-
